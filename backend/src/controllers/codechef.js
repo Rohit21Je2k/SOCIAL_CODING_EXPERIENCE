@@ -1,11 +1,15 @@
 import puppeteer from "puppeteer";
 
 const MODE = "notdev";
-
-// https://api.github.com/repos/sjsakib/cfviz
-// https://api.github.com/users/rohit21je2k
-// https://codeforces.com/api/user.status?handle=Rohit21Je2k
-// https://codeforces.com/api/user.rating?handle=Rohit21Je2k
+const do_conversion = (s) => {
+  let ans = "";
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] >= 0 && s[i] <= 9) {
+      ans += s[i];
+    }
+  }
+  return ans;
+};
 
 export const getcodechefProfile = async (req, res) => {
   try {
@@ -20,88 +24,44 @@ export const getcodechefProfile = async (req, res) => {
     await page.goto(url);
 
     //   wait for submission
-    await page.waitForSelector(
-      "span.ttext-label-1.dark\\:text-dark-label-1.font-medium"
-    );
+    await page.waitForSelector("body > main");
 
     let data = await page.evaluate(() => {
-      const rank = document.querySelector(
-        "span.ttext-label-1.dark\\:text-dark-label-1.font-medium"
+      const total_rating = document.querySelector(
+        "body > main > div > div > div > aside > div.widget.pl0.pr0.widget-rating > div > div.rating-header.text-center > div.rating-number"
       ).innerHTML;
-
-      const totalSolved = document.querySelector(
-        "body > div > div > div > div.w-full > div.flex.w-full.flex-col.lg\\:flex-row.space-x-0.space-y-4.lg\\:space-y-0.lg\\:space-x-4 > div.min-w-max.max-w-full.w-full.flex-1 > div > div.mx-3.flex.items-center.xl\\:mx-8 > div.mr-8.mt-6.flex.min-w-\\[100px\\].justify-center > div > div > div > div.text-\\[24px\\].font-medium.text-label-1.dark\\:text-dark-label-1"
+      let div = document.querySelector(
+        "body > main > div > div > div > aside > div.widget.pl0.pr0.widget-rating > div > div.rating-header.text-center > div:nth-child(2)"
       ).innerHTML;
-
-      const easy = document.querySelector(
-        "body > div > div > div > div.w-full > div.flex.w-full.flex-col.lg\\:flex-row.space-x-0.space-y-4.lg\\:space-y-0.lg\\:space-x-4 > div.min-w-max.max-w-full.w-full.flex-1 > div > div.mx-3.flex.items-center.xl\\:mx-8 > div.flex.w-full.flex-col.space-y-4.xl\\:max-w-\\[228px\\] > div:nth-child(1) > div.flex.w-full.items-end.text-xs > div.flex.flex-1.items-center > span.mr-\\[5px\\].text-base.font-medium.leading-\\[20px\\].text-label-1.dark\\:text-dark-label-1"
+      const global_rank = document.querySelector(
+        "body > main > div > div > div > aside > div.widget.pl0.pr0.widget-rating > div > div.rating-ranks > ul > li:nth-child(1) > a > strong"
       ).innerHTML;
-
-      const medium = document.querySelector(
-        "body > div > div > div > div.w-full > div.flex.w-full.flex-col.lg\\:flex-row.space-x-0.space-y-4.lg\\:space-y-0.lg\\:space-x-4 > div.min-w-max.max-w-full.w-full.flex-1 > div > div.mx-3.flex.items-center.xl\\:mx-8 > div.flex.w-full.flex-col.space-y-4.xl\\:max-w-\\[228px\\] > div:nth-child(2) > div.flex.w-full.items-end.text-xs > div.flex.flex-1.items-center > span.mr-\\[5px\\].text-base.font-medium.leading-\\[20px\\].text-label-1.dark\\:text-dark-label-1"
+      const country_rank = document.querySelector(
+        "body > main > div > div > div > aside > div.widget.pl0.pr0.widget-rating > div > div.rating-ranks > ul > li:nth-child(2) > a > strong"
       ).innerHTML;
-
-      const hard = document.querySelector(
-        "body > div > div > div > div.w-full > div.flex.w-full.flex-col.lg\\:flex-row.space-x-0.space-y-4.lg\\:space-y-0.lg\\:space-x-4 > div.min-w-max.max-w-full.w-full.flex-1 > div > div.mx-3.flex.items-center.xl\\:mx-8 > div.flex.w-full.flex-col.space-y-4.xl\\:max-w-\\[228px\\] > div:nth-child(3) > div.flex.w-full.items-end.text-xs > div.flex.flex-1.items-center > span.mr-\\[5px\\].text-base.font-medium.leading-\\[20px\\].text-label-1.dark\\:text-dark-label-1"
+      const fully_solved = document.querySelector(
+        "body > main > div > div > div > div > div > section.rating-data-section.problems-solved > div > h5:nth-child(1)"
       ).innerHTML;
-
-      const totalSubmission = document.querySelector(
-        "body > div > div > div > div.w-full > div:nth-child(4) > div > div.flex.flex-col.flex-wrap.space-y-2.md\\:flex-row.md\\:items-center.md\\:space-y-0 > div.flex.flex-1.items-center > span.mr-\\[5px\\].text-base.font-medium.md\\:text-xl"
+      const partially_solved = document.querySelector(
+        "body > main > div > div > div > div > div > section.rating-data-section.problems-solved > div > h5:nth-child(3)"
       ).innerHTML;
-
-      // recent submissions
-      const allrecent = document.querySelector(
-        "body > div > div > div > div.w-full > div:nth-child(5) > div > div > div.flex.flex-col"
-      );
-      const subarr = Array.from(allrecent.children);
-      let recent5 = [];
-
-      for (let i = 0; i < 5; i++) {
-        recent5.push(subarr[i].firstChild.firstChild.innerHTML);
-      }
-
-      // languages
-      const languagesContainer = document.querySelector(
-        "body > div > div > div > div:nth-child(1) > div > div.mt-4.flex.flex-col.space-y-3"
-      );
-      const langEls = Array.from(languagesContainer.children);
-      let langs = [];
-      langEls.forEach((node) => {
-        langs.push(node.firstChild.firstChild.innerHTML);
-      });
-
-      const contestRating = document.querySelector(
-        "body > div > div > div > div.w-full > div:nth-child(2) > div.shadow-level3.dark\\:shadow-dark-level3.bg-layer-1.dark\\:bg-dark-layer-1.rounded-lg.mt-4.flex.h-\\[200px\\].w-full.min-w-\\[200px\\].p-4.lg\\:mt-0.xl\\:hidden > div > div.relative.min-h-\\[53px\\].text-xs > div > div:nth-child(1) > div.text-label-1.dark\\:text-dark-label-1.flex.items-center.text-2xl"
-      ).innerHTML;
-      const contestAttented = document.querySelector(
-        "body > div > div > div > div.w-full > div:nth-child(2) > div.shadow-level3.dark\\:shadow-dark-level3.bg-layer-1.dark\\:bg-dark-layer-1.rounded-lg.mt-4.flex.h-\\[200px\\].w-full.min-w-\\[200px\\].p-4.lg\\:mt-0.xl\\:hidden > div > div.relative.min-h-\\[53px\\].text-xs > div > div:nth-child(3) > div.text-label-1.dark\\:text-dark-label-1.font-medium.leading-\\[22px\\]"
-      ).innerHTML;
-
-      const globalRanking = document
-        .querySelector(
-          "body > div > div > div > div.w-full > div:nth-child(2) > div.shadow-level3.dark\\:shadow-dark-level3.bg-layer-1.dark\\:bg-dark-layer-1.rounded-lg.mt-4.flex.h-\\[200px\\].w-full.min-w-\\[200px\\].p-4.lg\\:mt-0.xl\\:hidden > div > div.relative.min-h-\\[53px\\].text-xs > div > div:nth-child(2) > div.text-label-1.dark\\:text-dark-label-1.font-medium.leading-\\[22px\\]"
-        )
-        .innerHTML.split("<")[0];
-
       return {
-        rank,
-        globalRanking,
-        totalSolved,
-        easy,
-        medium,
-        hard,
-        totalSubmission,
-        contest: {
-          rating: contestRating,
-          attented: contestAttented,
-        },
-        langs,
-        recent5,
+        total_rating,
+        div,
+        global_rank,
+        country_rank,
+        fully_solved,
+        partially_solved,
       };
     });
 
     await page.close();
     await browser.close();
+
+    data.fully_solved = do_conversion(data.fully_solved);
+    data.partially_solved = do_conversion(data.partially_solved);
+    data.div = do_conversion(data.div);
+
     console.log(data);
 
     res.send(data);
