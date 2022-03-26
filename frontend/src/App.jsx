@@ -12,6 +12,7 @@ import DashBoard from "./components/DashBoard/DashBoard";
 import CreateAccount from "./components/CreateAccount/CreateAccount";
 import Friends from "./components/Friends/Friends";
 import Login from "./components/Login/Login";
+import LeaderBoards from "./components/LeaderBoard/LeaderBoards";
 
 import "./ui/styles/main.css";
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/signup" element={<CreateAccount />} />
           <Route path="/login" element={<Login />} />
           <Route path="/friends" element={<Friends />} />
+          <Route path="/leaderboard" element={<LeaderBoards />} />
           <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>
       </Router>

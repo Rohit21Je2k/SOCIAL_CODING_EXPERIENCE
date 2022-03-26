@@ -1,0 +1,73 @@
+.leaderBoard {
+  padding: 30px 0;
+}
+
+.leaderBoard .wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.leaderBoard .container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.leaderBoard_card {
+  padding: 10px 30px;
+  max-width: 500px;
+  border-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(4, 30px);
+  row-gap: 15px;
+  column-gap: 20px;
+}
+
+.leaderBoard_card span {
+  grid-row-start: 1;
+  grid-row-end: 5;
+}
+
+.leaderBoard_card span img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.leaderBoard_card h3 {
+  grid-column: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.leaderBoard_card h4 {
+  grid-column: 2;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+.leaderBoard_card .like {
+  grid-column: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  border: 0;
+  border-radius: 10px;
+  background-color: rgb(5, 201, 93);
+  color: white;
+  cursor: pointer;
+}
+
+.leaderBoard_card .dislike {
+  grid-column: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  border: 0;
+  border-radius: 10px;
+  background-color: rgb(224, 29, 15);
+  color: white;
+  cursor: pointer;
+}
