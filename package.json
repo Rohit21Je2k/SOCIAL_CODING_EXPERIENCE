@@ -1,0 +1,21 @@
+{
+  "name": "nullpointerexception_1_social_coding_experience",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "buildFront": "vite build ./frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rohit21Je2k/NullPointerException_1_SOCIAL_CODING_EXPERIENCE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rohit21Je2k/NullPointerException_1_SOCIAL_CODING_EXPERIENCE/issues"
+  },
+  "homepage": "https://github.com/Rohit21Je2k/NullPointerException_1_SOCIAL_CODING_EXPERIENCE#readme"
+}
