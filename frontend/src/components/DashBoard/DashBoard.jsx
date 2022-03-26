@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 import person from "../../assets/person.png";
+import Codechef from "../Profile/Codechef";
 import Github from "../Profile/Github";
+import LeetCode from "../Profile/LeetCode";
 import "./DashBoard.css";
 
 export default function DashBoard() {
@@ -57,18 +59,18 @@ export default function DashBoard() {
             onClick={handleClick()(3)}
             className="dashboard__profiles__menu"
           >
-            CodeForces
+            CodeChef
           </button>
         </div>
         {profileNum === 1 && <Github />}
         {profileNum === 2 && (
           <>
-            <h1>LeetCode</h1>
+            <LeetCode/>
           </>
         )}
         {profileNum === 3 && (
           <>
-            <h1>Code Forces</h1>
+           <Codechef/>
           </>
         )}
       </div>
