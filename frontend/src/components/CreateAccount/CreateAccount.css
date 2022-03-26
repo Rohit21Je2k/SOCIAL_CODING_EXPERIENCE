@@ -1,0 +1,39 @@
+.create-account {
+  padding: 30px 0;
+}
+
+.create-account .wrapper {
+  display: grid;
+  place-content: center;
+}
+
+.create-account .wrapper h2 {
+  margin-bottom: 30px;
+}
+
+.create-account__form {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.create-account__form button {
+  /* width: 150px; */
+  height: 50px;
+  border: 0;
+  border-radius: 999px;
+  background-color: rgb(14, 167, 238);
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+}
+
+.create-account__form .p {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  color: rgb(14, 167, 238);
+}

@@ -9,6 +9,9 @@ import {
 import NavBar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 import DashBoard from "./components/DashBoard/DashBoard";
+import CreateAccount from "./components/CreateAccount/CreateAccount";
+import Friends from "./components/Friends/Friends";
+import Login from "./components/Login/Login";
 
 import "./ui/styles/main.css";
 
@@ -20,6 +23,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<DashBoard />} />
+          <Route path="/signup" element={<CreateAccount />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/friends" element={<Friends />} />
           <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>
       </Router>

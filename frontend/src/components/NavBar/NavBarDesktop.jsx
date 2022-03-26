@@ -15,13 +15,13 @@ export default function NavBarDesktop() {
       <Link to="/" className="navbar-desktop__link">
         LeaderBoard
       </Link>
-      <Link to="/" className="navbar-desktop__link">
+      <Link to="/friends" className="navbar-desktop__link">
         Friends
       </Link>
-      <Link to="/" className="navbar-desktop__link">
+      <Link to="/signup" className="navbar-desktop__link">
         Create Account
       </Link>
-      <Link to="/" className="navbar-desktop__link">
+      <Link to="/login" className="navbar-desktop__link">
         Login
       </Link>
     </div>

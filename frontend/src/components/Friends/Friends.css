@@ -1,0 +1,9 @@
+.friends-page {
+  padding: 30px 0;
+}
+
+.friends-page .wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 30px;
+}
