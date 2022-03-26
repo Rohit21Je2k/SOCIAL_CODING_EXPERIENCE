@@ -1,0 +1,16 @@
+.profile {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.profile_details_card {
+  min-width: 200px;
+  padding: 25px;
+  border-radius: 20px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
