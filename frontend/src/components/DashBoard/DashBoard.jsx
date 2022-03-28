@@ -6,7 +6,7 @@ import Codechef from "../Profile/Codechef";
 import Github from "../Profile/Github";
 import LeetCode from "../Profile/LeetCode";
 
-import DisplayBox from "../DisplayBox/DIsplayBox";
+import DisplayBox from "../DisplayBox/DisplayBox";
 import "./DashBoard.css";
 
 export default function DashBoard() {
