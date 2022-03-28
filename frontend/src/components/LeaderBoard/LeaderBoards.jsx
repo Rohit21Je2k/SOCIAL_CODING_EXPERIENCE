@@ -6,8 +6,9 @@ import "./LeaderBoards.css";
 export default function LeaderBoards() {
   const [currActBtn, setCurrActBtn] = useState(null);
   const [board, setBoard] = useState(1);
+  const [userList, setUserList] = useState([]);
 
-  useEffect(() => {
+  useEffect(async () => {
     const el = document.querySelector(".leaderBoards_menu").firstChild;
     el.classList.add("selected");
     setCurrActBtn(el);
@@ -34,8 +35,10 @@ export default function LeaderBoards() {
           <button onClick={handleClick()(1)}>Global</button>
           <button onClick={handleClick()(2)}>Friends</button>
         </div>
-        {board == 1 && <LeaderBoard />}
-        {board == 2 && <LeaderBoard />}
+        {/* global */}
+        {board == 1 && <LeaderBoard type="global" />}
+        {/* friend */}
+        {board == 2 && <LeaderBoard type="friends" />}
       </div>
     </div>
   );

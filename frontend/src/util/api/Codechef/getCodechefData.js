@@ -1,8 +1,7 @@
+import apiUrl from "../../../api";
 export const getCodechefData = async (userId) => {
   try {
-    const response = await fetch(
-      `http://localhost:8000/api/cproutes/codechef/${userId}`
-    );
+    const response = await fetch(`${apiUrl}/api/cproutes/codechef/${userId}`);
     const data = await response.json();
     const {
       total_rating,

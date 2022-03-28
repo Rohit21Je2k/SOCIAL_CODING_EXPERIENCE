@@ -1,8 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-
-let apiURL = "https://ensvee.herokuapp.com";
-apiURL = "http://localhost:8000";
-// apiURL = "https://emergency-app-test.herokuapp.com";
+import apiUrl from "../../api";
 
 let logoutTimer;
 export function useAuth() {
@@ -11,6 +8,7 @@ export function useAuth() {
   const [tokenExpirationDate, setTokenExpirationDate] = useState();
 
   const authorize = (
+    name,
     email,
     github_username,
     leetcode_username,
@@ -26,6 +24,7 @@ export function useAuth() {
     localStorage.setItem(
       "userData",
       JSON.stringify({
+        name: name,
         email: email,
         github_username,
         leetcode_username,
@@ -37,6 +36,7 @@ export function useAuth() {
 
     // update state
     setUser({
+      name: name,
       email: email,
       github_username,
       leetcode_username,
@@ -90,6 +90,7 @@ export function useAuth() {
 
         if (token) {
           authorize(
+            name,
             email,
             github_username,
             leetcode_username,
@@ -124,6 +125,7 @@ export function useAuth() {
       const responseData = await response.json();
       const {
         message,
+        name,
         token,
         github_username,
         leetcode_username,
@@ -135,6 +137,7 @@ export function useAuth() {
       }
       if (token) {
         authorize(
+          name,
           email,
           github_username,
           leetcode_username,

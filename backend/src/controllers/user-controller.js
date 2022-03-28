@@ -15,12 +15,12 @@ export const getUser = async (req, res, next) => {
     });
 
   // extract inputs
-  const { userId } = req.body;
+  const { email } = req.body;
 
   // find user
   let user;
   try {
-    user = await User.findOne({ _id: userId });
+    user = await User.findOne({ email: email }, "-password");
   } catch (err) {
     return res.status(500).send({
       message: "Server Error",
@@ -34,11 +34,7 @@ export const getUser = async (req, res, next) => {
   }
 
   //   send response back
-  res.status(201).json({
-    userId: user.id,
-    email: user.email,
-    name: user.name,
-  });
+  res.status(201).json(user);
 };
 
 export const getUsers = async (req, res, next) => {
@@ -212,6 +208,7 @@ export const login = async (req, res, next) => {
 
   //   send response
   res.status(201).json({
+    name: existingUser.name,
     userId: existingUser.id,
     email: existingUser.email,
     token: token,

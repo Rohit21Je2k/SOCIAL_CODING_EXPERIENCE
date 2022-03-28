@@ -13,14 +13,15 @@ export default function DashBoard() {
   const { user } = useContext(AuthContext);
   const [currActBtn, setCurrActBtn] = useState(null);
   const [profileNum, setProfileNum] = useState(1);
-  const { github_username, leetcode_username, codechef_username } = user;
+  const { name, email, github_username, leetcode_username, codechef_username } =
+    user;
+
+  console.log(user);
   useEffect(() => {
     const el = document.querySelector(".dashboard__profiles").firstChild;
     el.classList.add("selected");
     setCurrActBtn(el);
   }, []);
-
-  console.log(profileNum);
 
   const handleClick = (e) => {
     return (index) => {
@@ -42,9 +43,9 @@ export default function DashBoard() {
           <span>
             <img src={person} alt="user" />
           </span>
-          <h2>Rohit21Je2k</h2>
-          <p>Joined on 25th March, 2022</p>
-          <button>Add Friend</button>
+          <h2>{name}</h2>
+          <p>{email}</p>
+          {/* <button>Add Friend</button> */}
         </div>
         <div className="dashboard__profiles">
           <button

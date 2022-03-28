@@ -33,12 +33,12 @@ router.post(
   login
 );
 
-router.post("/", [check("userId").not().isEmpty()], getUser);
+router.post("/", [check("email").not().isEmpty()], getUser);
 
 router.get("/users", getUsers);
 
-router.get('/leaderboard',getleaderboard);
+router.get("/leaderboard", getleaderboard);
 
-router.post('/addfriend',sendRequest);
+router.post("/addfriend", sendRequest);
 
 export default router;

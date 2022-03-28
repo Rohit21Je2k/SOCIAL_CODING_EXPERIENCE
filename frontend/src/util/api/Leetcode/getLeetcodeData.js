@@ -1,8 +1,7 @@
+import apiUrl from "../../../api";
 export const getLeetcodeData = async (userId) => {
   try {
-    const response = await fetch(
-      `http://localhost:8000/api/cproutes/leetcode/${userId}`
-    );
+    const response = await fetch(`${apiUrl}/api/cproutes/leetcode/${userId}`);
     const data = await response.json();
     const {
       rank,
