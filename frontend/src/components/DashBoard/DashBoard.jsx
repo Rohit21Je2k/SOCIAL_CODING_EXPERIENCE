@@ -36,6 +36,7 @@ export default function DashBoard() {
       };
     };
   };
+
   return (
     <div className="dashboard">
       <div className="wrapper">
