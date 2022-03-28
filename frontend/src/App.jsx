@@ -15,6 +15,7 @@ import CreateAccount from "./components/CreateAccount/CreateAccount";
 import Friends from "./components/Friends/Friends";
 import Login from "./components/Login/Login";
 import LeaderBoards from "./components/LeaderBoard/LeaderBoards";
+import Search from "./components/Search/Search";
 
 import "./ui/styles/main.css";
 
@@ -40,10 +41,12 @@ function App() {
               <>
                 <Route path="/dashboard" element={<DashBoard />} />
                 <Route path="/leaderboard" element={<LeaderBoards />} />
+                <Route path="/search" element={<Search />} />
                 <Route path="/friends" element={<Friends />} />
               </>
             )}
             <Route path="/signup" element={<CreateAccount />} />
+            <Route path="/user/:email" element={<DashBoard />} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<Navigate replace to="/" />} />
           </Routes>

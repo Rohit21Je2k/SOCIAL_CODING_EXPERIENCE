@@ -12,7 +12,7 @@ export default function FriendCard(props) {
         <img src={person} />
       </span>
       <h3>{name}</h3>
-      <button>Unfriend</button>
+      <button className="btn">Unfriend</button>
     </div>
   );
 }

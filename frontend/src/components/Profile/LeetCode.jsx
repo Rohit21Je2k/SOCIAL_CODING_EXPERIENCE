@@ -10,7 +10,7 @@ export default function LeetCode(props) {
     const data = await getLeetcodeData(username);
     console.log(data);
     setDetails(data);
-  }, []);
+  }, [username]);
 
   return (
     <div className="profile">

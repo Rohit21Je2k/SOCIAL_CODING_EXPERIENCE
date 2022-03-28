@@ -4,13 +4,15 @@ import "./Profile.css";
 
 export default function Codechef(props) {
   const { username } = props;
+  console.log(username);
+
   const [details, setDetails] = useState(null);
 
   useEffect(async () => {
     const data = await getCodechefData(username);
     console.log(data);
     setDetails(data);
-  }, []);
+  }, [username]);
 
   return (
     <div className="profile">

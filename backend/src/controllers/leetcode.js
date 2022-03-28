@@ -12,6 +12,7 @@ export const getLeetCodeProfile = async (req, res) => {
     });
 
     const { userId } = req.params;
+    console.log(userId);
     const url = `https://leetcode.com/${userId}/`;
     const page = await browser.newPage();
 
