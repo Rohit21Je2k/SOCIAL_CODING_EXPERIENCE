@@ -5,12 +5,23 @@ import cors from "cors";
 import userRouter from "./routes/user-routes.js";
 import dotenv from "dotenv";
 import usecpRoutes from "./routes/cproutes.js";
+import puppeteer from "puppeteer";
+
 dotenv.config();
 
 const app = express();
 
-// cors
 app.use(cors());
+
+const browser = await puppeteer.launch({
+  headless: true,
+  args: ["--no-sandbox", "--disable-setuid-sandbox"],
+});
+
+function mid(req, res, next) {
+  req.browser = browser;
+  next();
+}
 
 // bodyparser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,7 +35,7 @@ app.get("/", (req, res) => {
 app.use("/api/users", userRouter);
 
 //cp routes
-app.use("/api/cproutes", usecpRoutes);
+app.use("/api/cproutes", mid, usecpRoutes);
 
 // path not found
 app.use((req, res, next) => {
