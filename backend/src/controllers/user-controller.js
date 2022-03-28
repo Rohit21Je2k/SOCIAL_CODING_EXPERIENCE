@@ -106,9 +106,9 @@ export const signup = async (req, res, next) => {
     name, // name: name
     email,
     password: hashedPassword,
-    github_username,
-    leetcode_username,
-    codechef_username,
+    github_username: github_username,
+    leetcode_username: leetcode_username,
+    codechef_username: codechef_username,
     likes: like,
   });
 
@@ -139,9 +139,14 @@ export const signup = async (req, res, next) => {
   }
 
   //   send response back
-  res
-    .status(201)
-    .json({ userId: createdUser.id, email: createdUser.email, token: token });
+  res.status(201).json({
+    userId: createdUser.id,
+    email: createdUser.email,
+    token: token,
+    github_username,
+    leetcode_username,
+    codechef_username,
+  });
 };
 
 export const login = async (req, res, next) => {
@@ -206,9 +211,14 @@ export const login = async (req, res, next) => {
   }
 
   //   send response
-  res
-    .status(201)
-    .json({ userId: existingUser.id, email: existingUser.email, token: token });
+  res.status(201).json({
+    userId: existingUser.id,
+    email: existingUser.email,
+    token: token,
+    github_username: existingUser.github_username,
+    leetcode_username: existingUser.leetcode_username,
+    codechef_username: existingUser.codechef_username,
+  });
 };
 
 export const getleaderboard = async (req, res, next) => {
@@ -249,7 +259,7 @@ export const sendRequest = async (req, res, next) => {
   try {
     const { userId, friendId } = req.body;
     const user1 = await User.findOne({ email: userId });
-    const user2 = await User.findOne({email:friendId});
+    const user2 = await User.findOne({ email: friendId });
 
     user1.friends.push(friendId);
     user2.friends.push(userId);

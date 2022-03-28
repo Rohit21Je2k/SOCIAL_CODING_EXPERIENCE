@@ -3,13 +3,13 @@ import { getGithubData } from "../../util/api/Github/getGithubData";
 
 import "./Profile.css";
 
-export default function Github() {
-  const userId = "anuj12122000";
+export default function Github(props) {
+  const { username } = props;
 
   const [details, setDetails] = useState(null);
 
   useEffect(async () => {
-    const data = await getGithubData(userId);
+    const data = await getGithubData(username);
     console.log(data);
     setDetails(data);
   }, []);

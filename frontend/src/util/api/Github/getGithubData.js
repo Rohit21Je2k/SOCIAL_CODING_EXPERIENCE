@@ -6,6 +6,11 @@ export const getGithubData = async (userId) => {
     return [
       {
         type: "String",
+        title: "UserName",
+        value: userId,
+      },
+      {
+        type: "String",
         title: "Public Repos",
         value: public_repos,
       },

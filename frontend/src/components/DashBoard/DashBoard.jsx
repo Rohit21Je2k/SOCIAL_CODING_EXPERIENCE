@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../util/context/AuthContext";
 
 import person from "../../assets/person.png";
 import Codechef from "../Profile/Codechef";
 import Github from "../Profile/Github";
 import LeetCode from "../Profile/LeetCode";
+
+import DisplayBox from "../DisplayBox/DIsplayBox";
 import "./DashBoard.css";
 
 export default function DashBoard() {
+  const { user } = useContext(AuthContext);
   const [currActBtn, setCurrActBtn] = useState(null);
   const [profileNum, setProfileNum] = useState(1);
-
+  const { github_username, leetcode_username, codechef_username } = user;
   useEffect(() => {
     const el = document.querySelector(".dashboard__profiles").firstChild;
     el.classList.add("selected");
@@ -62,17 +66,17 @@ export default function DashBoard() {
             CodeChef
           </button>
         </div>
-        {profileNum === 1 && <Github />}
-        {profileNum === 2 && (
-          <>
-            <LeetCode/>
-          </>
-        )}
-        {profileNum === 3 && (
-          <>
-           <Codechef/>
-          </>
-        )}
+        <DisplayBox showValue={1} currValue={profileNum}>
+          <Github username={github_username} />
+        </DisplayBox>
+
+        <DisplayBox showValue={2} currValue={profileNum}>
+          <LeetCode username={leetcode_username} />
+        </DisplayBox>
+
+        <DisplayBox showValue={3} currValue={profileNum}>
+          <Codechef username={codechef_username} />
+        </DisplayBox>
       </div>
     </div>
   );

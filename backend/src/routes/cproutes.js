@@ -5,6 +5,6 @@ import { getLeetCodeProfile } from "../controllers/leetcode.js";
 const router = Router();
 
 router.get("/leetcode/:userId", getLeetCodeProfile);
-router.get("/codechef/:id",getcodechefProfile);
+router.get("/codechef/:userId", getcodechefProfile);
 
 export default router;

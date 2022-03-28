@@ -13,7 +13,7 @@ export const getLeetCodeProfile = async (req, res) => {
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
 
-    const userId = req.params.userId;
+    const { userId } = req.params;
     const url = `https://leetcode.com/${userId}/`;
     const page = await browser.newPage();
 
@@ -104,6 +104,7 @@ export const getLeetCodeProfile = async (req, res) => {
     await browser.close();
     console.log(data);
 
+    data.username = userId;
     res.send(data);
   } catch (err) {
     console.log(err);

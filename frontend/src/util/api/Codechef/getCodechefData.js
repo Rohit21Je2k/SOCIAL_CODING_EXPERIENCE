@@ -15,6 +15,11 @@ export const getCodechefData = async (userId) => {
     return [
       {
         type: "String",
+        title: "UserName",
+        value: userId,
+      },
+      {
+        type: "String",
         title: "OverAll Rating",
         value: total_rating,
       },

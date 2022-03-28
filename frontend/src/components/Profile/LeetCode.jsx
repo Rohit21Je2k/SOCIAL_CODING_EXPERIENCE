@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { getLeetcodeData } from "../../util/api/Leetcode/getLeetcodeData";
 import "./Profile.css";
 
-export default function LeetCode() {
+export default function LeetCode(props) {
+  const { username } = props;
   const [details, setDetails] = useState(null);
-  const userId = "anujjain12122000";
 
   useEffect(async () => {
-    const data = await getLeetcodeData(userId);
+    const data = await getLeetcodeData(username);
     console.log(data);
     setDetails(data);
   }, []);

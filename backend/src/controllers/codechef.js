@@ -18,7 +18,10 @@ export const getcodechefProfile = async (req, res) => {
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
 
-    const url = "https://www.codechef.com/users/ajdev";
+    const { userId } = req.params;
+    console.log(userId);
+
+    const url = "https://www.codechef.com/users/" + userId;
     const page = await browser.newPage();
 
     await page.goto(url);
@@ -58,6 +61,7 @@ export const getcodechefProfile = async (req, res) => {
     await page.close();
     await browser.close();
 
+    data.username = userId;
     data.fully_solved = do_conversion(data.fully_solved);
     data.partially_solved = do_conversion(data.partially_solved);
     data.div = do_conversion(data.div);

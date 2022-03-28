@@ -18,6 +18,11 @@ export const getLeetcodeData = async (userId) => {
     return [
       {
         type: "String",
+        title: "UserName",
+        value: userId,
+      },
+      {
+        type: "String",
         title: "Rank",
         value: rank,
       },

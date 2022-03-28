@@ -10,7 +10,7 @@ export default function Home() {
       <div className="wrapper">
         <div className="col-1">
           <h1>Social Coding Experience</h1>
-          <p>Where coders meet their loved ones</p>
+          <p>Where coders meet and interact with other coders</p>
         </div>
         <div className="col-2">
           <img src={svgImg} alt="img" />

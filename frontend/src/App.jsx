@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 
 import NavBar from "./components/NavBar/NavBar";
+import { AuthContext } from "./util/context/AuthContext";
+import { useAuth } from "./util/hooks/useAuth";
 import Home from "./components/Home/Home";
 import DashBoard from "./components/DashBoard/DashBoard";
 import CreateAccount from "./components/CreateAccount/CreateAccount";
@@ -17,20 +19,36 @@ import LeaderBoards from "./components/LeaderBoard/LeaderBoards";
 import "./ui/styles/main.css";
 
 function App() {
+  const { user, token, signup, signin, signout } = useAuth();
   return (
     <div className="App">
-      <Router>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<DashBoard />} />
-          <Route path="/signup" element={<CreateAccount />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/friends" element={<Friends />} />
-          <Route path="/leaderboard" element={<LeaderBoards />} />
-          <Route path="*" element={<Navigate replace to="/" />} />
-        </Routes>
-      </Router>
+      <AuthContext.Provider
+        value={{
+          isLoggedIn: !!token,
+          user,
+          token,
+          signup,
+          signin,
+          signout,
+        }}
+      >
+        <Router>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            {token && (
+              <>
+                <Route path="/dashboard" element={<DashBoard />} />
+                <Route path="/leaderboard" element={<LeaderBoards />} />
+                <Route path="/friends" element={<Friends />} />
+              </>
+            )}
+            <Route path="/signup" element={<CreateAccount />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<Navigate replace to="/" />} />
+          </Routes>
+        </Router>
+      </AuthContext.Provider>
     </div>
   );
 }

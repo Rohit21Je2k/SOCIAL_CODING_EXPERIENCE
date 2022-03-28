@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {getCodechefData} from '../../util/api/Codechef/getCodechefData'
+import { getCodechefData } from "../../util/api/Codechef/getCodechefData";
 import "./Profile.css";
 
-export default function Codechef() {
+export default function Codechef(props) {
+  const { username } = props;
   const [details, setDetails] = useState(null);
-  const userId = "ajdev";
-  
 
   useEffect(async () => {
-    const data = await getCodechefData(userId);
+    const data = await getCodechefData(username);
     console.log(data);
     setDetails(data);
   }, []);
