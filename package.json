@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "buildFront": "vite build ./frontend"
+    "buildFront": "vite build ./frontend",
+    "start": "node backend/src/index.js"
   },
   "repository": {
     "type": "git",
