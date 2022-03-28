@@ -12,13 +12,14 @@ export const getLeetCodeProfile = async (req, res) => {
     });
 
     const { userId } = req.params;
+    console.log(userId);
     const url = `https://leetcode.com/${userId}/`;
     const page = await browser.newPage();
 
     await page.goto(url);
 
     //   wait for submission
-    await page.waitForSelector("body > div");
+    await page.waitForTimeout(5000);
 
     let data = await page.evaluate(() => {
       const rank = document.querySelector(

@@ -12,7 +12,7 @@ export default function Github(props) {
     const data = await getGithubData(username);
     console.log(data);
     setDetails(data);
-  }, []);
+  }, [username]);
 
   return (
     <div className="github profile">
