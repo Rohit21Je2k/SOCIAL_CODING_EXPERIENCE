@@ -41,10 +41,10 @@ export default function CreateAccount() {
             placeholder="Enter LeetCode username here"
           />
           <Input
-            label="CodeForces Username"
+            label="CodeChef Username"
             type="text"
             name="codeForcesID"
-            placeholder="Enter CodeForces username here"
+            placeholder="Enter CodeChef username here"
           />
           <button type="submit">Submit</button>
           <Link className="p" to="/login">

@@ -64,8 +64,16 @@ export const signup = async (req, res, next) => {
       message: "Invalid Inputs",
     });
 
+  let like = 0;
   //   extract inputs
-  const { name, email, password } = req.body;
+  const {
+    name,
+    email,
+    password,
+    github_username,
+    leetcode_username,
+    codechef_username,
+  } = req.body;
 
   //   check for existing user
   let existingUser;
@@ -98,6 +106,10 @@ export const signup = async (req, res, next) => {
     name, // name: name
     email,
     password: hashedPassword,
+    github_username,
+    leetcode_username,
+    codechef_username,
+    likes: like,
   });
 
   //   store to database
@@ -197,4 +209,58 @@ export const login = async (req, res, next) => {
   res
     .status(201)
     .json({ userId: existingUser.id, email: existingUser.email, token: token });
+};
+
+export const getleaderboard = async (req, res, next) => {
+  let users;
+  try {
+    users = await User.find({}, [
+      "-password",
+      "-github_username",
+      "-leetcode_username",
+      "-codechef_username",
+      "-friends",
+    ]);
+
+    users.sort(function (c, d) {
+      if (!c.likes) {
+        c.likes = 0;
+      }
+      if (!d.likes) {
+        d.likes = 0;
+      }
+      // console.log(c.likes+" "+d.likes);
+      return d.likes - c.likes;
+    });
+    res.status(201).json({ users });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({
+      message: "Server Error",
+    });
+  }
+
+  // console.log(users);
+};
+
+export const sendRequest = async (req, res, next) => {
+  // find user
+
+  try {
+    const { userId, friendId } = req.body;
+    const user1 = await User.findOne({ email: userId });
+    const user2 = await User.findOne({email:friendId});
+
+    user1.friends.push(friendId);
+    user2.friends.push(userId);
+
+    await user1.save();
+    await user2.save();
+    res.send("hi");
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({
+      message: "Server Error",
+    });
+  }
 };

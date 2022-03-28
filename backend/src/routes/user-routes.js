@@ -6,6 +6,8 @@ import {
   getUser,
   signup,
   login,
+  getleaderboard,
+  sendRequest,
 } from "../controllers/user-controller.js";
 
 const router = Router();
@@ -34,5 +36,9 @@ router.post(
 router.post("/", [check("userId").not().isEmpty()], getUser);
 
 router.get("/users", getUsers);
+
+router.get('/leaderboard',getleaderboard);
+
+router.post('/addfriend',sendRequest);
 
 export default router;
