@@ -2,8 +2,6 @@ import puppeteer from "puppeteer";
 
 // https://api.github.com/repos/sjsakib/cfviz
 // https://api.github.com/users/rohit21je2k
-// https://codeforces.com/api/user.status?handle=Rohit21Je2k
-// https://codeforces.com/api/user.rating?handle=Rohit21Je2k
 const MODE = "notdev";
 
 export const getLeetCodeProfile = async (req, res) => {
