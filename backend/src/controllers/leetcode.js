@@ -18,7 +18,7 @@ export const getLeetCodeProfile = async (req, res) => {
     await page.goto(url);
 
     //   wait for submission
-    await page.waitForSelector("body > div");
+    await page.waitForTimeout(5000);
 
     let data = await page.evaluate(() => {
       const rank = document.querySelector(
