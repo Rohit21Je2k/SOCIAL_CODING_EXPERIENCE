@@ -14,7 +14,7 @@ const do_conversion = (s) => {
 export const getcodechefProfile = async (req, res) => {
   try {
     const browser = await puppeteer.launch({
-      headless: MODE === "dev" ? false : true,
+      headless: true,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
 

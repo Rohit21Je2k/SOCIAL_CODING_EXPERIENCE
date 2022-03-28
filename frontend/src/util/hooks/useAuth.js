@@ -63,7 +63,7 @@ export function useAuth() {
       codechef_username
     ) => {
       try {
-        let reqUrl = `${apiURL}/api/users/signup`;
+        let reqUrl = `${apiUrl}/api/users/signup`;
 
         let reqFormValues = {
           name,
@@ -113,7 +113,7 @@ export function useAuth() {
         password,
       };
 
-      const reqUrl = `${apiURL}/api/users/login`;
+      const reqUrl = `${apiUrl}/api/users/login`;
 
       const response = await fetch(reqUrl, {
         method: "POST",

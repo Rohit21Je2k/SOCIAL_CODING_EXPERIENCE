@@ -1,3 +1,3 @@
-const apiUrl = "http://localhost:8000";
+const apiUrl = "https://socialcodingexp.herokuapp.com";
 
 export default apiUrl;
