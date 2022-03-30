@@ -8,7 +8,6 @@ export default function LeetCode(props) {
 
   useEffect(async () => {
     const data = await getLeetcodeData(username);
-    console.log(data);
     setDetails(data);
   }, [username]);
 

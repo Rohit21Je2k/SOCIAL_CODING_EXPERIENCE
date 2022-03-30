@@ -138,6 +138,7 @@ export const signup = async (req, res, next) => {
   res.status(201).json({
     userId: createdUser.id,
     email: createdUser.email,
+    friends: createdUser.friends,
     token: token,
     github_username,
     leetcode_username,
@@ -211,6 +212,7 @@ export const login = async (req, res, next) => {
     name: existingUser.name,
     userId: existingUser.id,
     email: existingUser.email,
+    friends: existingUser.friends,
     token: token,
     github_username: existingUser.github_username,
     leetcode_username: existingUser.leetcode_username,
@@ -250,24 +252,40 @@ export const getleaderboard = async (req, res, next) => {
   // console.log(users);
 };
 
-export const sendRequest = async (req, res, next) => {
-  // find user
-
+export const sendRequest = async (req, res) => {
   try {
     const { userId, friendId } = req.body;
+    if (!userId || !friendId) {
+      throw {
+        error: "Invalid inputs",
+      };
+    }
     const user1 = await User.findOne({ email: userId });
+    if (!user1) {
+      throw {
+        error: "User not found",
+      };
+    }
+    if (user1.friends.includes(friendId)) {
+      throw {
+        error: "Already added as friend",
+      };
+    }
     const user2 = await User.findOne({ email: friendId });
+    if (!user2) {
+      throw {
+        error: "Friend not found",
+      };
+    }
 
     user1.friends.push(friendId);
     user2.friends.push(userId);
 
     await user1.save();
     await user2.save();
-    res.send("hi");
+    res.send("Success");
   } catch (err) {
     console.log(err);
-    return res.status(500).send({
-      message: "Server Error",
-    });
+    return res.status(500).send(err);
   }
 };

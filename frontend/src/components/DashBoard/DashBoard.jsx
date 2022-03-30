@@ -1,111 +1,134 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../../util/context/AuthContext";
-import apiUrl from "../../api";
-
-import person from "../../assets/person.png";
-import Codechef from "../Profile/Codechef";
-import Github from "../Profile/Github";
-import LeetCode from "../Profile/LeetCode";
 import { useParams } from "react-router-dom";
 
+// components
+import apiUrl from "../../api";
+import Loader from "../Loader/Loader";
 import DisplayBox from "../DisplayBox/DisplayBox";
+import Profile from "../Profile/Profile";
+import { getGithubData } from "../../util/api/Github/getGithubData";
+import { getLeetcodeData } from "../../util/api/Leetcode/getLeetcodeData";
+import { getCodechefData } from "../../util/api/Codechef/getCodechefData";
+import { addFriend } from "../../util/api/addFriend";
+import { AuthContext } from "../../util/context/AuthContext";
+
+// assets
+import person from "../../assets/person.png";
+
+// css
 import "./DashBoard.css";
 
 export default function DashBoard() {
+  // from params
   const { email: userEmail } = useParams();
-  console.log(userEmail);
 
-  const { user } = useContext(AuthContext);
-  const { name, email, github_username, leetcode_username, codechef_username } =
-    user;
+  // logged in user
+  const { user, setUser, token } = useContext(AuthContext);
+  const { friends } = user || {};
+
+  // states
+  const [loading, setLoading] = useState(true);
+  const [friendReqLoading, setFriendReqLoading] = useState(false);
   const [userDetails, setUserDetails] = useState(null);
-  const [currActBtn, setCurrActBtn] = useState(null);
+  const { name, email, github_username, leetcode_username, codechef_username } =
+    userDetails || {};
   const [profileNum, setProfileNum] = useState(1);
 
-  console.log(user);
+  // useEffect
   useEffect(async () => {
-    const el = document.querySelector(".dashboard__profiles").firstChild;
-    el.classList.add("selected");
-    setCurrActBtn(el);
-    if (!userEmail) {
-      return;
-    }
+    setLoading(true);
     const userData = await getUser(userEmail);
-    // console.log(userData);
-
     setUserDetails(userData);
-  }, []);
+    setLoading(false);
+  }, [userEmail]);
 
-  console.log(userDetails);
-
-  const handleClick = (e) => {
-    return (index) => {
-      return (e) => {
-        const el = e.target;
-        if (!el.classList.contains("selected")) {
-          currActBtn.classList.remove("selected");
-          el.classList.add("selected");
-          setProfileNum(index);
-          setCurrActBtn(el);
-        }
-      };
+  const handleClick = (index) => {
+    return () => {
+      setProfileNum(index);
     };
+  };
+
+  const addFriendHandler = async () => {
+    try {
+      setFriendReqLoading(true);
+      await addFriend(user.email, userEmail);
+      setFriendReqLoading(false);
+      alert("Friend request sent");
+      setUser((prev) => {
+        prev.friends.push(userEmail);
+        return {
+          ...prev,
+        };
+      });
+    } catch (err) {
+      console.log(err);
+      // alert(err);
+    }
   };
 
   return (
     <div className="dashboard">
       <div className="wrapper">
-        <div className="dashboard__user">
-          <span>
-            <img src={person} alt="user" />
-          </span>
-          <h2>{userDetails ? userDetails.name : name}</h2>
-          <p>{userDetails ? userDetails.email : email}</p>
-          {/* <button>Add Friend</button> */}
-        </div>
-        <div className="dashboard__profiles">
-          <button
-            onClick={handleClick()(1)}
-            className="dashboard__profiles__menu"
-          >
-            Github
-          </button>
-          <button
-            onClick={handleClick()(2)}
-            className="dashboard__profiles__menu"
-          >
-            LeetCode
-          </button>
-          <button
-            onClick={handleClick()(3)}
-            className="dashboard__profiles__menu"
-          >
-            CodeChef
-          </button>
-        </div>
-        <DisplayBox showValue={1} currValue={profileNum}>
-          <Github
-            username={
-              userDetails ? userDetails.github_username : github_username
-            }
-          />
-        </DisplayBox>
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <div className="dashboard__user">
+              <span>
+                <img src={person} alt="user" />
+              </span>
+              <h2>{name}</h2>
+              <p>{email}</p>
+              {userEmail != user.email &&
+                !user.friends?.includes(userDetails.email) && (
+                  <>
+                    <button onClick={addFriendHandler}>Add Friend</button>
+                  </>
+                )}
+              {friendReqLoading && (
+                <p className="m-t-20">Sending friend request...</p>
+              )}
+            </div>
+            <div className="dashboard__profiles">
+              <button
+                onClick={handleClick(1)}
+                className={`dashboard__profiles__menu ${
+                  profileNum === 1 ? "selected" : null
+                }`}
+              >
+                Github
+              </button>
+              <button
+                onClick={handleClick(2)}
+                className={`dashboard__profiles__menu ${
+                  profileNum === 2 ? "selected" : null
+                }`}
+              >
+                LeetCode
+              </button>
+              <button
+                onClick={handleClick(3)}
+                className={`dashboard__profiles__menu ${
+                  profileNum === 3 ? "selected" : null
+                }`}
+              >
+                CodeChef
+              </button>
+            </div>
 
-        <DisplayBox showValue={2} currValue={profileNum}>
-          <LeetCode
-            username={
-              userDetails ? userDetails.leetcode_username : leetcode_username
-            }
-          />
-        </DisplayBox>
+            <DisplayBox showValue={1} currValue={profileNum}>
+              <Profile username={github_username} getData={getGithubData} />
+            </DisplayBox>
 
-        <DisplayBox showValue={3} currValue={profileNum}>
-          <Codechef
-            username={
-              userDetails ? userDetails.codechef_username : codechef_username
-            }
-          />
-        </DisplayBox>
+            <DisplayBox showValue={2} currValue={profileNum}>
+              <Profile username={leetcode_username} getData={getLeetcodeData} />
+            </DisplayBox>
+
+            <DisplayBox showValue={3} currValue={profileNum}>
+              <Profile username={codechef_username} getData={getCodechefData} />
+            </DisplayBox>
+          </>
+        )}
       </div>
     </div>
   );

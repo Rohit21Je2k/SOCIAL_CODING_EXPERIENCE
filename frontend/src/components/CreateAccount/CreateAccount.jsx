@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Input from "../../ui/Input/Input";
 import { AuthContext } from "../../util/context/AuthContext";
@@ -10,8 +10,11 @@ export default function CreateAccount() {
   const navigate = useNavigate();
   const { signup } = useContext(AuthContext);
 
+  const [loading, setLoading] = useState(false);
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
@@ -30,6 +33,7 @@ export default function CreateAccount() {
 
     await signup(name, email, password, githubID, leetcodeID, codechefID);
     form.reset();
+    setLoading(false);
     navigate("/");
   };
   return (
@@ -42,38 +46,46 @@ export default function CreateAccount() {
             type="text"
             name="name"
             placeholder="Enter Name here"
+            required
           />
           <Input
             label="Email"
             type="email"
             name="email"
             placeholder="Enter Email here"
+            required
           />
           <Input
             label="Password"
             type="password"
             name="password"
             placeholder="Enter Password here"
+            autoComplete="off"
+            required
           />
           <Input
             label="Github Username"
             type="text"
             name="githubID"
             placeholder="Enter Github username here"
+            required
           />
           <Input
             label="LeetCode Username"
             type="text"
             name="leetcodeID"
             placeholder="Enter LeetCode username here"
+            required
           />
           <Input
             label="CodeChef Username"
             type="text"
             name="codechefID"
             placeholder="Enter CodeChef username here"
+            required
           />
           <button type="submit">Submit</button>
+          {loading && <p className="load-text">Submitting...</p>}
           <Link className="p" to="/login">
             or, Login
           </Link>

@@ -1,3 +1,10 @@
 .login {
   padding: 30px 0;
 }
+
+.load-text {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: gray;
+}

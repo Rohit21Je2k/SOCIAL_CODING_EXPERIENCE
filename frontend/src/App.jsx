@@ -20,13 +20,14 @@ import Search from "./components/Search/Search";
 import "./ui/styles/main.css";
 
 function App() {
-  const { user, token, signup, signin, signout } = useAuth();
+  const { user, setUser, token, signup, signin, signout } = useAuth();
   return (
     <div className="App">
       <AuthContext.Provider
         value={{
           isLoggedIn: !!token,
           user,
+          setUser,
           token,
           signup,
           signin,
@@ -39,14 +40,13 @@ function App() {
             <Route path="/" element={<Home />} />
             {token && (
               <>
-                <Route path="/dashboard" element={<DashBoard />} />
                 <Route path="/leaderboard" element={<LeaderBoards />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/friends" element={<Friends />} />
               </>
             )}
             <Route path="/signup" element={<CreateAccount />} />
-            <Route path="/user/:email" element={<DashBoard />} />
+            <Route path="/dashboard/:email" element={<DashBoard />} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<Navigate replace to="/" />} />
           </Routes>
