@@ -12,6 +12,9 @@ export default function NavBarDesktop() {
       <Link to="/" className="navbar-desktop__link">
         Home
       </Link>
+      <Link to="/search" className="navbar-desktop__link">
+        Search
+      </Link>
       {token && (
         <>
           <Link
@@ -22,9 +25,6 @@ export default function NavBarDesktop() {
           </Link>
           <Link to="/leaderBoard" className="navbar-desktop__link">
             LeaderBoard
-          </Link>
-          <Link to="/search" className="navbar-desktop__link">
-            Search
           </Link>
           <Link to="/friends" className="navbar-desktop__link">
             Friends

@@ -41,10 +41,10 @@ function App() {
             {token && (
               <>
                 <Route path="/leaderboard" element={<LeaderBoards />} />
-                <Route path="/search" element={<Search />} />
                 <Route path="/friends" element={<Friends />} />
               </>
             )}
+            <Route path="/search" element={<Search />} />
             <Route path="/signup" element={<CreateAccount />} />
             <Route path="/dashboard/:email" element={<DashBoard />} />
             <Route path="/login" element={<Login />} />

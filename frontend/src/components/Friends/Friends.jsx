@@ -7,7 +7,7 @@ import apiUrl from "../../api";
 import "./Friends.css";
 
 export default function Friends() {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const { email } = user;
   const [loading, setLoading] = useState(true);
   const [friendList, setFriendList] = useState([]);
@@ -22,6 +22,12 @@ export default function Friends() {
 
       const data = await response.json();
       setFriendList(data.friends);
+      setUser((prev) => {
+        prev.friends = data.friends;
+        return {
+          ...prev,
+        };
+      });
       setLoading(false);
     } catch (err) {
       console.log(err);
@@ -36,12 +42,12 @@ export default function Friends() {
           <>
             <h2 className="t-al-c">Friends</h2>
             <div className="container">
-              {friendList.length === 0 ? (
+              {user.friends.length === 0 ? (
                 <div className="profile_details_card">
                   <h3>No friends found</h3>
                 </div>
               ) : (
-                friendList.map((friend) => {
+                user.friends.map((friend) => {
                   return <FriendCard name={friend} />;
                 })
               )}

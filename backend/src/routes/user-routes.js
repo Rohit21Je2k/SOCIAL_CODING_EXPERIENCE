@@ -8,6 +8,7 @@ import {
   login,
   getleaderboard,
   sendRequest,
+  unFriend,
 } from "../controllers/user-controller.js";
 
 const router = Router();
@@ -40,5 +41,7 @@ router.get("/users", getUsers);
 router.get("/leaderboard", getleaderboard);
 
 router.post("/addfriend", sendRequest);
+
+router.post("/unfriend", unFriend);
 
 export default router;

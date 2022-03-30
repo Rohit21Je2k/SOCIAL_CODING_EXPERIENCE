@@ -79,7 +79,8 @@ export default function DashBoard() {
               </span>
               <h2>{name}</h2>
               <p>{email}</p>
-              {userEmail != user.email &&
+              {user &&
+                userEmail != user.email &&
                 !user.friends?.includes(userDetails.email) && (
                   <>
                     <button onClick={addFriendHandler}>Add Friend</button>

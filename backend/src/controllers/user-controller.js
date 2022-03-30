@@ -289,3 +289,42 @@ export const sendRequest = async (req, res) => {
     return res.status(500).send(err);
   }
 };
+
+export const unFriend = async (req, res) => {
+  try {
+    const { userId, friendId } = req.body;
+    if (!userId || !friendId) {
+      throw {
+        error: "Invalid inputs",
+      };
+    }
+    const user1 = await User.findOne({ email: userId });
+    if (!user1) {
+      throw {
+        error: "User not found",
+      };
+    }
+    if (!user1.friends.includes(friendId)) {
+      throw {
+        error: "Friend not found",
+      };
+    }
+
+    const user2 = await User.findOne({ email: friendId });
+    if (!user2) {
+      throw {
+        error: "Friend not found",
+      };
+    }
+
+    user1.friends.pull(friendId);
+    user2.friends.pull(userId);
+
+    await user1.save();
+    await user2.save();
+    res.send("Success");
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send(err);
+  }
+};
