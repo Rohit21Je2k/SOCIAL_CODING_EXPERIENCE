@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../util/context/AuthContext";
+import Loader from "../Loader/Loader";
 
 import person from "../../assets/person.png";
 import apiUrl from "../../api";
@@ -8,14 +9,17 @@ import "./LeaderBoard.css";
 
 function LeaderBoardCard(props) {
   const { name, votes } = props;
-  const [vote, setVote] = useState(votes || 0);
+  const prev = votes;
+  const [vote, setVote] = useState(votes);
 
   const incr = () => {
-    setVote(vote + 1);
+    setVote(prev + 1);
   };
 
   const dcr = () => {
-    setVote(vote - 1);
+    if (vote > 0) {
+      setVote(vote - 1);
+    }
   };
 
   return (
@@ -23,7 +27,7 @@ function LeaderBoardCard(props) {
       <span>
         <img src={person} />
       </span>
-      <h3>{name}</h3>
+      <h3 className="mw-100">{name}</h3>
       <h4>Votes {vote}</h4>
       <button onClick={incr} className="like">
         UpVote
@@ -40,11 +44,12 @@ export default function LeaderBoard(props) {
   const { user } = useContext(AuthContext);
   const { email } = user;
 
+  const [loading, setLoading] = useState(true);
   const [userList, setUserList] = useState([]);
   useEffect(async () => {
     try {
+      setLoading(true);
       let data;
-
       if (type === "global") {
         data = await getGlobalLeaderBoard();
       } else {
@@ -52,6 +57,7 @@ export default function LeaderBoard(props) {
       }
       console.log(data);
       setUserList(data);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -59,21 +65,27 @@ export default function LeaderBoard(props) {
   return (
     <div className="leaderBoard">
       <div className="wrapper">
-        <div className="container">
-          {userList.length === 0 ? (
-            <h2>No Users</h2>
-          ) : (
-            userList.map((user, index) => {
-              return (
-                <LeaderBoardCard
-                  key={index}
-                  name={user.name}
-                  votes={user.likes}
-                />
-              );
-            })
-          )}
-        </div>
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <div className="container">
+              {userList.length === 0 ? (
+                <h2>No Users</h2>
+              ) : (
+                userList.map((user, index) => {
+                  return (
+                    <LeaderBoardCard
+                      key={index}
+                      name={user.email || user}
+                      votes={user.likes || 0}
+                    />
+                  );
+                })
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import apiUrl from "../../api";
 import Loader from "../Loader/Loader";
 import DisplayBox from "../DisplayBox/DisplayBox";
 import Profile from "../Profile/Profile";
+import AddFriendBtn from "../AddFriendBtn/AddFriendBtn";
 import { getGithubData } from "../../util/api/Github/getGithubData";
 import { getLeetcodeData } from "../../util/api/Leetcode/getLeetcodeData";
 import { getCodechefData } from "../../util/api/Codechef/getCodechefData";
@@ -79,13 +80,11 @@ export default function DashBoard() {
               </span>
               <h2>{name}</h2>
               <p>{email}</p>
-              {user &&
-                userEmail != user.email &&
-                !user.friends?.includes(userDetails.email) && (
-                  <>
-                    <button onClick={addFriendHandler}>Add Friend</button>
-                  </>
-                )}
+              <AddFriendBtn
+                user={user}
+                setUser={setUser}
+                userEmail={userEmail}
+              />
               {friendReqLoading && (
                 <p className="m-t-20">Sending friend request...</p>
               )}

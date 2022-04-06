@@ -5,6 +5,7 @@ import cors from "cors";
 import userRouter from "./routes/user-routes.js";
 import dotenv from "dotenv";
 import usecpRoutes from "./routes/cproutes.js";
+import PlatformRouter from "./routes/platforms.js";
 import puppeteer from "puppeteer";
 
 dotenv.config();
@@ -36,6 +37,8 @@ app.use("/api/users", userRouter);
 
 //cp routes
 app.use("/api/cproutes", mid, usecpRoutes);
+
+app.use("/api/platforms", PlatformRouter);
 
 // path not found
 app.use((req, res, next) => {

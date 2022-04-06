@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { AuthContext } from "../../util/context/AuthContext";
 import { unFriend } from "../../util/api/unfriend";
 
@@ -9,10 +9,13 @@ import "./FriendCard.css";
 export default function FriendCard(props) {
   const { user, setUser } = useContext(AuthContext);
   const { name } = props;
+  const [loading, setLoading] = useState(false);
 
   const handleClick = async () => {
     try {
+      setLoading(true);
       await unFriend(user.email, name);
+      setLoading(false);
       setUser((prev) => {
         let friends = prev.friends;
         friends = friends.filter((v) => v != name);
@@ -34,6 +37,7 @@ export default function FriendCard(props) {
       <button onClick={handleClick} className="btn">
         Unfriend
       </button>
+      {loading && <p>Sending Request</p>}
     </div>
   );
 }

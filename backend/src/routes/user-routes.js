@@ -10,6 +10,7 @@ import {
   sendRequest,
   unFriend,
 } from "../controllers/user-controller.js";
+import { getGlobalLeaderboard } from "../controllers/leaderboard.js";
 
 const router = Router();
 
@@ -38,7 +39,7 @@ router.post("/", [check("email").not().isEmpty()], getUser);
 
 router.get("/users", getUsers);
 
-router.get("/leaderboard", getleaderboard);
+router.get("/leaderboard", getGlobalLeaderboard);
 
 router.post("/addfriend", sendRequest);
 
