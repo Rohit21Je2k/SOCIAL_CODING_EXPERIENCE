@@ -3,10 +3,12 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import userRouter from "./routes/user-routes.js";
+import authRouter from "./routes/auth-routes.js";
 import dotenv from "dotenv";
 import usecpRoutes from "./routes/cproutes.js";
-import PlatformRouter from "./routes/platforms.js";
+import PlatformRouter from "./routes/platform-routes.js";
 import puppeteer from "puppeteer";
+import { httpError } from "./middleware/httpError.js";
 
 dotenv.config();
 
@@ -33,18 +35,20 @@ app.get("/", (req, res) => {
   res.send("hello");
 });
 
+// auth
+app.use("/api/auth", authRouter);
+
 app.use("/api/users", userRouter);
 
 //cp routes
 app.use("/api/cproutes", mid, usecpRoutes);
 
-app.use("/api/platforms", PlatformRouter);
+// platforms
+app.use("/api/platform", PlatformRouter);
 
 // path not found
 app.use((req, res, next) => {
-  res.status(400).send({
-    message: "path does not exist",
-  });
+  res.send(httpError("path does not exist"));
 });
 
 mongoose

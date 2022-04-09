@@ -1,9 +1,11 @@
 import React from "react";
 
 import svgImg from "../../assets/home_img.svg";
+import { getCodeChefData } from "../../util/api/getCodeChefData";
 import "./Home.css";
 
 export default function Home() {
+  getCodeChefData();
   return (
     <div className="home">
       <div className="wrapper">

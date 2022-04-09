@@ -1,4 +1,5 @@
 import axios from "axios";
+import { httpError } from "../../../middleware/httpError.js";
 import { query } from "./query.js";
 
 export const getLeetCodeData = async (req, res) => {
@@ -22,6 +23,9 @@ export const getLeetCodeData = async (req, res) => {
     });
     const data = response.data.data;
     const matchedUser = data.matchedUser;
+    if (matchedUser == null) {
+      throw httpError("User not found");
+    }
     const userContests = data.userContestRanking;
     const userSubmissions = matchedUser.submitStats.acSubmissionNum;
     const userLanguages = matchedUser.languageProblemCount;
@@ -29,9 +33,9 @@ export const getLeetCodeData = async (req, res) => {
     const result = {
       username: matchedUser.username,
       profileRank: matchedUser.profile.ranking,
-      contestRank: userContests.globalRanking,
-      contestRating: userContests.rating,
-      contestAttended: userContests.attendedContestsCount,
+      contestRank: userContests?.globalRanking || 0,
+      contestRating: Math.floor(userContests?.rating || 0),
+      contestAttended: userContests?.attendedContestsCount || 0,
       totalSolved: userSubmissions[0].count,
       easy: userSubmissions[1].count,
       medium: userSubmissions[2].count,
@@ -43,6 +47,10 @@ export const getLeetCodeData = async (req, res) => {
   } catch (err) {
     // how to check error in axios err.response.data
     console.log(err);
-    res.send("Failed");
+    if (err.error) {
+      res.send(err);
+    } else {
+      res.send(httpError("Failed to fetch Leetcode profile"));
+    }
   }
 };
