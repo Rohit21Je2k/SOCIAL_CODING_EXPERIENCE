@@ -13,10 +13,7 @@ const do_conversion = (s) => {
 
 export const getcodechefProfile = async (req, res) => {
   try {
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
+    const browser = req.browser;
 
     const { userId } = req.params;
     console.log(userId);
@@ -59,7 +56,6 @@ export const getcodechefProfile = async (req, res) => {
     });
 
     await page.close();
-    await browser.close();
 
     data.username = userId;
     data.fully_solved = do_conversion(data.fully_solved);

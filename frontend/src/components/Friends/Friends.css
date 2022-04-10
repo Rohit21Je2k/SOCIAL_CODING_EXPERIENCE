@@ -5,6 +5,11 @@
 .friends-page .container {
   margin-top: 30px;
   display: flex;
-  flex-wrap: nowrap;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 30px;
+}
+
+.friends-page .container h3 {
+  font-size: 20px;
 }

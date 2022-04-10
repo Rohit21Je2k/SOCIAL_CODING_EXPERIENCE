@@ -6,10 +6,7 @@ const MODE = "notdev";
 
 export const getLeetCodeProfile = async (req, res) => {
   try {
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
+    const browser = req.browser;
 
     const { userId } = req.params;
     console.log(userId);
@@ -98,7 +95,7 @@ export const getLeetCodeProfile = async (req, res) => {
     });
 
     await page.close();
-    await browser.close();
+
     console.log(data);
 
     data.username = userId;

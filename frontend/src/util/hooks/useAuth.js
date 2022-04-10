@@ -7,14 +7,7 @@ export function useAuth() {
   const [token, setToken] = useState();
   const [tokenExpirationDate, setTokenExpirationDate] = useState();
 
-  const authorize = (
-    name,
-    email,
-    github_username,
-    leetcode_username,
-    codechef_username,
-    token
-  ) => {
+  const authorize = (details) => {
     //   calculate token expiration time
     const tokenValidity = 1000 * 60 * 60; // 1 hour
     const currentDate = Date.now();
@@ -24,25 +17,14 @@ export function useAuth() {
     localStorage.setItem(
       "userData",
       JSON.stringify({
-        name: name,
-        email: email,
-        github_username,
-        leetcode_username,
-        codechef_username,
-        token: token,
+        ...details,
         expiration: tokenExpirationDate,
       })
     );
 
     // update state
-    setUser({
-      name: name,
-      email: email,
-      github_username,
-      leetcode_username,
-      codechef_username,
-    });
-    setToken(token);
+    setUser(details);
+    setToken(details.token);
     setTokenExpirationDate(tokenExpirationDate);
   };
 
@@ -83,20 +65,23 @@ export function useAuth() {
         });
 
         const responseData = await response.json();
-        const { message, token } = responseData;
+        const { message, token, friends } = responseData;
         if (message) {
           alert(message);
         }
 
+        const details = {
+          name,
+          email,
+          friends,
+          github_username,
+          leetcode_username,
+          codechef_username,
+          token,
+        };
+
         if (token) {
-          authorize(
-            name,
-            email,
-            github_username,
-            leetcode_username,
-            codechef_username,
-            token
-          );
+          authorize(details);
         }
       } catch (err) {
         alert(err);
@@ -127,6 +112,7 @@ export function useAuth() {
         message,
         name,
         token,
+        friends,
         github_username,
         leetcode_username,
         codechef_username,
@@ -135,15 +121,18 @@ export function useAuth() {
       if (message) {
         alert(message);
       }
+
+      const details = {
+        name,
+        email,
+        friends,
+        github_username,
+        leetcode_username,
+        codechef_username,
+        token,
+      };
       if (token) {
-        authorize(
-          name,
-          email,
-          github_username,
-          leetcode_username,
-          codechef_username,
-          token
-        );
+        authorize(details);
       }
     } catch (err) {
       alert("Fetching Error");
@@ -179,5 +168,5 @@ export function useAuth() {
     }
   }, []);
 
-  return { user, token, signup, signin, signout };
+  return { user, setUser, token, signup, signin, signout };
 }

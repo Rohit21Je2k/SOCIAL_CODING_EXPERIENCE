@@ -41,6 +41,7 @@
   font-size: 16px;
   font-weight: 600;
   color: rgba(255, 255, 255, 1);
+  cursor: pointer;
 }
 
 .dashboard__profiles {
@@ -72,4 +73,12 @@
   border: 0;
   width: 664px;
   height: 105px;
+}
+
+.m-t-20 {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: gray;
 }

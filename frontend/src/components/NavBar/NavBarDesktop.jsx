@@ -6,22 +6,25 @@ import Logout from "../Logout/Logout";
 import "./NavBarDesktop.css";
 
 export default function NavBarDesktop() {
-  const { token } = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
   return (
     <div className="navbar-desktop">
       <Link to="/" className="navbar-desktop__link">
         Home
       </Link>
+      <Link to="/search" className="navbar-desktop__link">
+        Search
+      </Link>
       {token && (
         <>
-          <Link to="/dashboard" className="navbar-desktop__link">
+          <Link
+            to={`/dashboard/${user.email}`}
+            className="navbar-desktop__link"
+          >
             Dashboard
           </Link>
           <Link to="/leaderBoard" className="navbar-desktop__link">
             LeaderBoard
-          </Link>
-          <Link to="/search" className="navbar-desktop__link">
-            Search
           </Link>
           <Link to="/friends" className="navbar-desktop__link">
             Friends
