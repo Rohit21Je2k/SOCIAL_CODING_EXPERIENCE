@@ -1,0 +1,12 @@
+.groups-list {
+  padding: 20px 10px 30px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-basis: 30%;
+  overflow-y: scroll;
+}
+
+.groups-list::-webkit-scrollbar {
+  width: 0;
+}

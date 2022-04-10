@@ -1,0 +1,7 @@
+.all-groups {
+  display: flex;
+  margin-top: 20px;
+  gap: 10px;
+  height: 500px;
+  overflow: hidden;
+}

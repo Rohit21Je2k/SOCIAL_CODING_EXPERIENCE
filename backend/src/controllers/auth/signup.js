@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import Auth from "../../models/auth.js";
@@ -5,6 +8,7 @@ import User from "../../models/user.js";
 import { httpError } from "../../util/functions/_index.js";
 
 const JWT_KEY = process.env.JWT_KEY;
+
 const saltRounds = 12;
 
 const signup = async (req, res) => {

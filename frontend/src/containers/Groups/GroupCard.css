@@ -1,0 +1,17 @@
+.group-card {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.group-card img {
+  border-radius: 50%;
+  border: 2px solid gray;
+}
+
+.group-card h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: gray;
+}

@@ -1,0 +1,15 @@
+.groups-chat {
+  flex-basis: 70%;
+  padding: 20px 10px;
+}
+
+.group-chat-card {
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.groups-chat-messages {
+  flex-grow: 1;
+}

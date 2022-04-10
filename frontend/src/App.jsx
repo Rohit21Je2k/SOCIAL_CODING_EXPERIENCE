@@ -18,6 +18,7 @@ import LeaderBoards from "./components/LeaderBoard/LeaderBoards";
 import Search from "./components/Search/Search";
 
 import "./ui/styles/main.css";
+import Groups from "./containers/Groups/Groups";
 
 function App() {
   const { user, setUser, token, signup, signin, signout } = useAuth();
@@ -44,6 +45,7 @@ function App() {
                 <Route path="/friends" element={<Friends />} />
               </>
             )}
+            <Route path="/groups" element={<Groups />} />
             <Route path="/search" element={<Search />} />
             <Route path="/signup" element={<CreateAccount />} />
             <Route path="/dashboard/:email" element={<DashBoard />} />
