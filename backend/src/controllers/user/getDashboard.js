@@ -1,7 +1,6 @@
-import { httpError } from "../../middleware/httpError.js";
+import { httpError } from "../../util/functions/_index.js";
 import User from "../../models/user.js";
-import { fetchLeetCode } from "../platform/leetcode/fetchLeetCode.js";
-import { fetchGithub } from "../platform/github/fetchGithub.js";
+import { fetchGithub, fetchLeetCode } from "../../util/api/_index.js";
 
 // 1 min = 60,000 milliseconds
 const oneMinToMilli = 60_000;

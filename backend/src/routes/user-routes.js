@@ -12,9 +12,14 @@ import {
 } from "../controllers/user-controller.js";
 import { getGlobalLeaderboard } from "../controllers/leaderboard.js";
 
+import { getDashboard } from "../controllers/user/getDashboard.js";
+
 const router = Router();
 
+// password length
 const passLength = 6;
+
+router.get("/dashboard/:username", getDashboard);
 
 router.post(
   "/signup",

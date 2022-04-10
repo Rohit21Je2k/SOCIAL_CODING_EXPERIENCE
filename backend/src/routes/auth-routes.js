@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { signup } from "../controllers/auth/signup.js";
-import isEmpty from "../middleware/validators/isEmpty.js";
+import { signup } from "../controllers/auth/_index.js";
+import { isEmpty } from "../middleware/validators/_index.js";
 const router = Router();
 
 router.post(
   "/signup",
-  isEmpty({ path: "req.body.name", check: false, msg: "name is empty" }),
+  isEmpty({ path: "req.body.name", check: true, msg: "name is empty" }),
   signup
 );
 

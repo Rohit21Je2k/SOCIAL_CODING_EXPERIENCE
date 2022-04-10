@@ -8,7 +8,7 @@ import dotenv from "dotenv";
 import usecpRoutes from "./routes/cproutes.js";
 import PlatformRouter from "./routes/platform-routes.js";
 import puppeteer from "puppeteer";
-import { httpError } from "./middleware/httpError.js";
+import { httpError } from "./util/functions/_index.js";
 
 dotenv.config();
 

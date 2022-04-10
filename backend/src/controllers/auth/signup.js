@@ -2,12 +2,12 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import Auth from "../../models/auth.js";
 import User from "../../models/user.js";
-import { httpError } from "../../middleware/httpError.js";
+import { httpError } from "../../util/functions/_index.js";
 
 const JWT_KEY = "supersecret_dontshare";
 const saltRounds = 12;
 
-export const signup = async (req, res, next) => {
+const signup = async (req, res, next) => {
   try {
     const {
       name,
@@ -85,3 +85,5 @@ export const signup = async (req, res, next) => {
     res.send(httpError("Signup failed"));
   }
 };
+
+export default signup;

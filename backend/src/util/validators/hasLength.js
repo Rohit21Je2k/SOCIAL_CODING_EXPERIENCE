@@ -1,4 +1,4 @@
-export const hasLength = (string, min, max) => {
+const hasLength = (string, min, max) => {
   const length = string.length;
   if (length != -1 && length < min) {
     return false;
@@ -8,3 +8,5 @@ export const hasLength = (string, min, max) => {
   }
   return true;
 };
+
+export default hasLength;
