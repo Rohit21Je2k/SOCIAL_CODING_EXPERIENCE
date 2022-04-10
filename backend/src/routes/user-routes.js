@@ -12,7 +12,7 @@ import {
 } from "../controllers/user-controller.js";
 import { getGlobalLeaderboard } from "../controllers/leaderboard.js";
 
-import { getDashboard } from "../controllers/user/getDashboard.js";
+import { getDashboard } from "../controllers/user/_index.js";
 
 const router = Router();
 

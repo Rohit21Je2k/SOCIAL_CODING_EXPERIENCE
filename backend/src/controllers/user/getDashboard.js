@@ -6,7 +6,7 @@ import { fetchGithub, fetchLeetCode } from "../../util/api/_index.js";
 const oneMinToMilli = 60_000;
 const updateCycle = 30 * oneMinToMilli;
 
-export const getDashboard = async (req, res) => {
+const getDashboard = async (req, res) => {
   try {
     const { username } = req.params;
 
@@ -45,3 +45,5 @@ export const getDashboard = async (req, res) => {
     }
   }
 };
+
+export default getDashboard;
