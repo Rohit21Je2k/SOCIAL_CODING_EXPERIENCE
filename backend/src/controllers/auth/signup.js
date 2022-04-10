@@ -4,10 +4,10 @@ import Auth from "../../models/auth.js";
 import User from "../../models/user.js";
 import { httpError } from "../../util/functions/_index.js";
 
-const JWT_KEY = "supersecret_dontshare";
+const JWT_KEY = process.env.JWT_KEY;
 const saltRounds = 12;
 
-const signup = async (req, res, next) => {
+const signup = async (req, res) => {
   try {
     const {
       name,
