@@ -13,6 +13,9 @@ import {
 import { getGlobalLeaderboard } from "../controllers/leaderboard.js";
 
 import { getDashboard } from "../controllers/user/_index.js";
+import { follow } from "../controllers/user/follow.js";
+import { getfollower } from "../controllers/user/getfollower.js";
+import { unfollow } from "../controllers/user/unfollow.js";
 
 const router = Router();
 
@@ -49,5 +52,10 @@ router.get("/leaderboard", getGlobalLeaderboard);
 router.post("/addfriend", sendRequest);
 
 router.post("/unfriend", unFriend);
+
+router.post('/follow',follow);
+router.get('/getfollower',getfollower);
+router.post('/unfollow',unfollow);
+
 
 export default router;
