@@ -8,7 +8,6 @@ function Menu(props) {
 
 function Item(props) {
   const { children, className, ...attr } = props;
-  console.log(className);
   return (
     <button
       className={`${menuBtn} ${className === "selected" ? selected : null}`}

@@ -1,4 +1,4 @@
-import apiUrl from "../../../api";
+import apiUrl from "../../api";
 export const getCodechefData = async (userId) => {
   try {
     const response = await fetch(`${apiUrl}/api/cproutes/codechef/${userId}`);

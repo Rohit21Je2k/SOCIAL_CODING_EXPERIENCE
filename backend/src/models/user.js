@@ -32,6 +32,12 @@ const userSchema = new Schema({
 
   codechef: {
     username: { type: String, required: true },
+    totalRating: Number,
+    div: Number,
+    globalRank: String,
+    countryRank: String,
+    fullySolved: Number,
+    partiallySolved: Number,
   },
 
   rank: { type: Number, required: true },

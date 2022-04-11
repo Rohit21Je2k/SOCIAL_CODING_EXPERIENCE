@@ -1,4 +1,4 @@
-import apiUrl from "../../api";
+import apiUrl from "../api";
 
 export async function addFriend(userId, friendId) {
   try {

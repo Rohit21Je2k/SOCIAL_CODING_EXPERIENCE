@@ -23,7 +23,7 @@ export function useAuth() {
     );
 
     // update state
-    setUser(details);
+    setUser({ ...details });
     setToken(details.token);
     setTokenExpirationDate(tokenExpirationDate);
   };
@@ -38,18 +38,18 @@ export function useAuth() {
   const signup = useCallback(
     async (
       name,
-      email,
+      username,
       password,
       github_username,
       leetcode_username,
       codechef_username
     ) => {
       try {
-        let reqUrl = `${apiUrl}/api/users/signup`;
+        let reqUrl = `${apiUrl}/api/auth/signup`;
 
         let reqFormValues = {
           name,
-          email,
+          username,
           password,
           github_username,
           leetcode_username,
@@ -65,18 +65,13 @@ export function useAuth() {
         });
 
         const responseData = await response.json();
-        const { message, token, friends } = responseData;
-        if (message) {
-          alert(message);
+        const { error, token } = responseData;
+        if (error) {
+          throw error;
         }
 
         const details = {
-          name,
-          email,
-          friends,
-          github_username,
-          leetcode_username,
-          codechef_username,
+          username,
           token,
         };
 
@@ -84,21 +79,23 @@ export function useAuth() {
           authorize(details);
         }
       } catch (err) {
-        alert(err);
         console.log(err);
+        if (err.error) {
+          alert(err);
+        }
       }
     },
     []
   );
 
-  const signin = useCallback(async (email, password) => {
+  const signin = useCallback(async (username, password) => {
     try {
       const reqFormValues = {
-        email,
+        username,
         password,
       };
 
-      const reqUrl = `${apiUrl}/api/users/login`;
+      const reqUrl = `${apiUrl}/api/auth/login`;
 
       const response = await fetch(reqUrl, {
         method: "POST",
@@ -108,35 +105,25 @@ export function useAuth() {
         },
       });
       const responseData = await response.json();
-      const {
-        message,
-        name,
-        token,
-        friends,
-        github_username,
-        leetcode_username,
-        codechef_username,
-      } = responseData;
-      console.log(responseData);
-      if (message) {
-        alert(message);
+      const { error, token } = responseData;
+
+      if (error) {
+        throw error;
       }
 
       const details = {
-        name,
-        email,
-        friends,
-        github_username,
-        leetcode_username,
-        codechef_username,
+        username,
         token,
       };
+
       if (token) {
         authorize(details);
       }
     } catch (err) {
-      alert("Fetching Error");
       console.log(err);
+      if (err.error) {
+        alert(err);
+      }
     }
   }, []);
 
@@ -162,7 +149,7 @@ export function useAuth() {
       storedData.token &&
       new Date(storedData.expiration) > new Date()
     ) {
-      setUser({ email: storedData.email });
+      setUser({ ...storedData });
       setToken(storedData.token);
       setTokenExpirationDate(storedData.expiration);
     }

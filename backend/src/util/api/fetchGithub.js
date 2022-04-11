@@ -13,6 +13,7 @@ const fetchGithub = async (username) => {
     };
   } catch (err) {
     console.log(err);
+    return null;
   }
 };
 

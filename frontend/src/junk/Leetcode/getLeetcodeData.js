@@ -1,4 +1,4 @@
-import apiUrl from "../../../api";
+import apiUrl from "../../api";
 export const getLeetcodeData = async (userId) => {
   try {
     const response = await fetch(`${apiUrl}/api/cproutes/leetcode/${userId}`);

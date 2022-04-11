@@ -8,7 +8,7 @@ export default function GroupsChat() {
   return (
     <div className="groups-chat">
       <Card className="group-chat-card">
-        <h3>Emacs Lover</h3>
+        <h3>DSA C++</h3>
         <div className="groups-chat-messages">hi</div>
         <form>
           <Input placeholder="Enter Message here..." />

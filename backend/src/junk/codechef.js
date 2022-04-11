@@ -1,6 +1,3 @@
-import puppeteer from "puppeteer";
-
-const MODE = "notdev";
 const do_conversion = (s) => {
   let ans = "";
   for (let i = 0; i < s.length; i++) {

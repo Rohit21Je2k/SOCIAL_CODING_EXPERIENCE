@@ -15,13 +15,9 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     const form = e.target;
-    const email = form.email.value;
+    const username = form.username.value;
     const password = form.password.value;
-    console.log({
-      email,
-      password,
-    });
-    await signin(email, password);
+    await signin(username, password);
     form.reset();
     setLoading(false);
     navigate("/");
@@ -32,10 +28,10 @@ export default function Login() {
         <h2>Login</h2>
         <form onSubmit={handleFormSubmit} className="create-account__form">
           <Input
-            label="Email"
-            type="email"
-            name="email"
-            placeholder="Enter Email here"
+            label="Username"
+            type="text"
+            name="username"
+            placeholder="Enter Username here"
             required
           />
           <Input

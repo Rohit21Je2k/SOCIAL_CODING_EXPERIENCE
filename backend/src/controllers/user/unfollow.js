@@ -1,6 +1,6 @@
 import usermodel from "../../models/user.js";
 
-export const unfollow = async (req, res, next) => {
+const unFollow = async (req, res) => {
   // user1 ke followers main
 
   const username1 = req.body.username1;
@@ -9,7 +9,7 @@ export const unfollow = async (req, res, next) => {
   try {
     const user1 = await usermodel.findOne({ username: username1 });
     const user2 = await usermodel.findOne({ username: username2 });
-    console.log(user1 + " " + user2);
+
     if (user1.following.indexOf(username2) != -1) {
       await user1.following.splice(user1.following.indexOf(username2), 1);
       await user1.save();
@@ -26,3 +26,5 @@ export const unfollow = async (req, res, next) => {
     res.status(500).send(err);
   }
 };
+
+export default unFollow;

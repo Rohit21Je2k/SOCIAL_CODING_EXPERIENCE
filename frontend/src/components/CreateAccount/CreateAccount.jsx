@@ -17,21 +17,21 @@ export default function CreateAccount() {
     setLoading(true);
     const form = e.target;
     const name = form.name.value;
-    const email = form.email.value;
+    const username = form.username.value;
     const password = form.password.value;
     const githubID = form.githubID.value;
     const leetcodeID = form.leetcodeID.value;
     const codechefID = form.codechefID.value;
     console.log({
       name,
-      email,
+      username,
       password,
       githubID,
       leetcodeID,
       codechefID,
     });
 
-    await signup(name, email, password, githubID, leetcodeID, codechefID);
+    await signup(name, username, password, githubID, leetcodeID, codechefID);
     form.reset();
     setLoading(false);
     navigate("/");
@@ -49,10 +49,10 @@ export default function CreateAccount() {
             required
           />
           <Input
-            label="Email"
-            type="email"
-            name="email"
-            placeholder="Enter Email here"
+            label="Username"
+            type="text"
+            name="username"
+            placeholder="Enter Username here"
             required
           />
           <Input

@@ -18,7 +18,7 @@ export default function NavBarDesktop() {
       {token && (
         <>
           <Link
-            to={`/dashboard/${user.email}`}
+            to={`/dashboard/${user.username}`}
             className="navbar-desktop__link"
           >
             Dashboard
@@ -26,8 +26,11 @@ export default function NavBarDesktop() {
           <Link to="/leaderBoard" className="navbar-desktop__link">
             LeaderBoard
           </Link>
-          <Link to="/friends" className="navbar-desktop__link">
-            Friends
+          <Link to="/follow" className="navbar-desktop__link">
+            Follow
+          </Link>
+          <Link to="/groups" className="navbar-desktop__link">
+            Groups
           </Link>
         </>
       )}

@@ -1,6 +1,6 @@
 import usermodel from "../../models/user.js";
 
-export const follow = async (req, res, next) => {
+const follow = async (req, res, next) => {
   const username1 = req.body.username1;
   const username2 = req.body.username2;
   try {
@@ -23,6 +23,10 @@ export const follow = async (req, res, next) => {
     }
   } catch (err) {
     console.log(err);
-    res.status(500).send(err);
+    res.status(500).send({
+      error: "failed to make changes",
+    });
   }
 };
+
+export default follow;

@@ -12,7 +12,8 @@ import { useAuth } from "./util/hooks/useAuth";
 import Home from "./components/Home/Home";
 import DashBoard from "./components/DashBoard/DashBoard";
 import CreateAccount from "./components/CreateAccount/CreateAccount";
-import Friends from "./components/Friends/Friends";
+// import Friends from "./components/Friends/Friends";
+import Follow from "./components/Follow/Follow";
 import Login from "./components/Login/Login";
 import LeaderBoards from "./components/LeaderBoard/LeaderBoards";
 import Search from "./components/Search/Search";
@@ -42,13 +43,13 @@ function App() {
             {token && (
               <>
                 <Route path="/leaderboard" element={<LeaderBoards />} />
-                <Route path="/friends" element={<Friends />} />
+                <Route path="/follow" element={<Follow />} />
               </>
             )}
             <Route path="/groups" element={<Groups />} />
             <Route path="/search" element={<Search />} />
             <Route path="/signup" element={<CreateAccount />} />
-            <Route path="/dashboard/:email" element={<DashBoard />} />
+            <Route path="/dashboard/:username" element={<DashBoard />} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<Navigate replace to="/" />} />
           </Routes>

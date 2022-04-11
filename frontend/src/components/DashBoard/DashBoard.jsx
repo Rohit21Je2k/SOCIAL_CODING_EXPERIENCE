@@ -1,70 +1,41 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
-// components
-import apiUrl from "../../api";
 import Loader from "../Loader/Loader";
 import DisplayBox from "../DisplayBox/DisplayBox";
 import Profile from "../Profile/Profile";
-import AddFriendBtn from "../AddFriendBtn/AddFriendBtn";
-import { getGithubData } from "../../util/api/Github/getGithubData";
-import { getLeetcodeData } from "../../util/api/Leetcode/getLeetcodeData";
-import { getCodechefData } from "../../util/api/Codechef/getCodechefData";
-import { addFriend } from "../../util/api/addFriend";
+import { getDashboard } from "../../util/api";
 import { AuthContext } from "../../util/context/AuthContext";
 
-// assets
 import person from "../../assets/person.png";
-
-// css
 import "./DashBoard.css";
 
 export default function DashBoard() {
   // from params
-  const { email: userEmail } = useParams();
+  const { username: requiredUser } = useParams();
 
   // logged in user
-  const { user, setUser, token } = useContext(AuthContext);
-  const { friends } = user || {};
+  const { user: loggedUser } = useContext(AuthContext);
 
   // states
   const [loading, setLoading] = useState(true);
-  const [friendReqLoading, setFriendReqLoading] = useState(false);
   const [userDetails, setUserDetails] = useState(null);
-  const { name, email, github_username, leetcode_username, codechef_username } =
+  const { name, username, rank, github, leetcode, codechef } =
     userDetails || {};
   const [profileNum, setProfileNum] = useState(1);
 
   // useEffect
   useEffect(async () => {
     setLoading(true);
-    const userData = await getUser(userEmail);
+    const userData = await getDashboard(requiredUser);
     setUserDetails(userData);
     setLoading(false);
-  }, [userEmail]);
+  }, [requiredUser]);
 
   const handleClick = (index) => {
     return () => {
       setProfileNum(index);
     };
-  };
-
-  const addFriendHandler = async () => {
-    try {
-      setFriendReqLoading(true);
-      await addFriend(user.email, userEmail);
-      setFriendReqLoading(false);
-      alert("Friend request sent");
-      setUser((prev) => {
-        prev.friends.push(userEmail);
-        return {
-          ...prev,
-        };
-      });
-    } catch (err) {
-      console.log(err);
-      // alert(err);
-    }
   };
 
   return (
@@ -79,15 +50,8 @@ export default function DashBoard() {
                 <img src={person} alt="user" />
               </span>
               <h2>{name}</h2>
-              <p>{email}</p>
-              <AddFriendBtn
-                user={user}
-                setUser={setUser}
-                userEmail={userEmail}
-              />
-              {friendReqLoading && (
-                <p className="m-t-20">Sending friend request...</p>
-              )}
+              <p>Username: {username}</p>
+              <p>Rank : {rank}</p>
             </div>
             <div className="dashboard__profiles">
               <button
@@ -117,35 +81,19 @@ export default function DashBoard() {
             </div>
 
             <DisplayBox showValue={1} currValue={profileNum}>
-              <Profile username={github_username} getData={getGithubData} />
+              <Profile profile="github" details={github} />
             </DisplayBox>
 
             <DisplayBox showValue={2} currValue={profileNum}>
-              <Profile username={leetcode_username} getData={getLeetcodeData} />
+              <Profile profile="leetcode" details={leetcode} />
             </DisplayBox>
 
             <DisplayBox showValue={3} currValue={profileNum}>
-              <Profile username={codechef_username} getData={getCodechefData} />
+              <Profile profile="codechef" details={codechef} />
             </DisplayBox>
           </>
         )}
       </div>
     </div>
   );
-}
-
-async function getUser(email) {
-  try {
-    const response = await fetch(apiUrl + "/api/users/", {
-      method: "POST",
-      body: JSON.stringify({ email }),
-      headers: { "Content-Type": "application/json" },
-    });
-
-    const data = await response.json();
-    return data;
-  } catch (err) {
-    console.log(err);
-    return null;
-  }
 }

@@ -3,8 +3,7 @@ import Input from "../../ui/Input/Input";
 import person from "../../assets/person.png";
 import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
-import apiUrl from "../../api";
-
+import search from "../../util/api/search";
 import "./Search.css";
 
 export default function Search() {
@@ -15,9 +14,9 @@ export default function Search() {
     e.preventDefault();
     setLoading(true);
     setShow(true);
-    const email = e.target.email.value;
-    const user = await getUser(email);
-    setUser(user);
+    const username = e.target.username.value;
+    const data = await search(username);
+    setUser(data?.username);
     setLoading(false);
   };
 
@@ -26,10 +25,10 @@ export default function Search() {
       <div className="wrapper">
         <form onSubmit={handleSubmit}>
           <Input
-            label="Enter User Email"
-            type="email"
-            name="email"
-            placeholder="Enter user email..."
+            label="Enter Username"
+            type="text"
+            name="username"
+            placeholder="Enter username..."
           />
           <button>Submit</button>
         </form>
@@ -38,12 +37,12 @@ export default function Search() {
         ) : (
           show &&
           (user ? (
-            <div className="friend_card">
+            <div className="follow_card">
               <span>
                 <img src={person} />
               </span>
-              <h3>{user.name}</h3>
-              <Link className="btn" to={`/dashboard/${user.email}`}>
+              <h3>{user}</h3>
+              <Link className="btn" to={`/dashboard/${user}`}>
                 View Profile
               </Link>
             </div>
@@ -54,23 +53,4 @@ export default function Search() {
       </div>
     </div>
   );
-}
-
-async function getUser(email) {
-  try {
-    const response = await fetch(apiUrl + "/api/users/", {
-      method: "POST",
-      body: JSON.stringify({ email }),
-      headers: { "Content-Type": "application/json" },
-    });
-
-    const data = await response.json();
-    if (data.message) {
-      return null;
-    }
-    return data;
-  } catch (err) {
-    console.log(err);
-    return null;
-  }
 }

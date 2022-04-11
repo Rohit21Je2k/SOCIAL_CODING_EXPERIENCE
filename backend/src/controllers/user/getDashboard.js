@@ -1,6 +1,10 @@
 import { httpError } from "../../util/functions/_index.js";
 import User from "../../models/user.js";
-import { fetchGithub, fetchLeetCode } from "../../util/api/_index.js";
+import {
+  fetchGithub,
+  fetchLeetCode,
+  fetchCodeChef,
+} from "../../util/api/_index.js";
 
 // 1 min = 60,000 milliseconds
 const oneMinToMilli = 60_000;
@@ -23,8 +27,23 @@ const getDashboard = async (req, res) => {
       const codechef_username = existingUser.codechef.username;
       const leetcode_data = await fetchLeetCode(leetcode_username);
       const github_data = await fetchGithub(github_username);
-      existingUser.leetcode = leetcode_data;
-      existingUser.github = github_data;
+      const codechef_data = await fetchCodeChef(req.browser, codechef_username);
+      const leetcode_rank = leetcode_data.profileRank;
+      const codechef_rank =
+        codechef_data.globalRank == "Inactive"
+          ? 500_000
+          : codechef_data.globalRank;
+      const rank = (leetcode_rank + codechef_rank) / 2;
+      if (leetcode_data) {
+        existingUser.leetcode = leetcode_data;
+      }
+      if (github_data) {
+        existingUser.github = github_data;
+      }
+      if (codechef_data) {
+        existingUser.codechef = codechef_data;
+      }
+      existingUser.rank = rank;
       existingUser.nextUpdateCycle = new Date().getTime() + updateCycle;
       await existingUser.save();
     }

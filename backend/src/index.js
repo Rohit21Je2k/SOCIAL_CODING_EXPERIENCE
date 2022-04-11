@@ -7,8 +7,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import userRouter from "./routes/user-routes.js";
 import authRouter from "./routes/auth-routes.js";
-import usecpRoutes from "./routes/cproutes.js";
-import PlatformRouter from "./routes/platform-routes.js";
+
 import puppeteer from "puppeteer";
 import { httpError } from "./util/functions/_index.js";
 
@@ -26,33 +25,28 @@ const browser = await puppeteer.launch({
   args: ["--no-sandbox", "--disable-setuid-sandbox"],
 });
 
-function mid(req, res, next) {
+const addBrowser = (req, res, next) => {
   req.browser = browser;
   next();
-}
+};
 
 // bodyparser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// api
+// home
 app.get("/", (req, res) => {
-  res.send("hello");
+  res.send("Server Running");
 });
 
 // auth
 app.use("/api/auth", authRouter);
 
-app.use("/api/users", userRouter);
-
-//cp routes
-app.use("/api/cproutes", mid, usecpRoutes);
-
-// platforms
-app.use("/api/platform", PlatformRouter);
+// user
+app.use("/api/users", addBrowser, userRouter);
 
 // path not found
-app.use((req, res, next) => {
+app.use((req, res) => {
   res.send(httpError("path does not exist"));
 });
 
