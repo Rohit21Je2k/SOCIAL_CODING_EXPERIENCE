@@ -13,7 +13,6 @@ export default function FollowCard(props) {
       </span>
       <h3>{username}</h3>
       <button className="btn">{status}</button>
-      {loading && <p>Sending Request</p>}
     </div>
   );
 }

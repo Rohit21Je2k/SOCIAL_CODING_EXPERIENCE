@@ -1,10 +1,10 @@
 import usermodel from "../../models/user.js";
 
-const unFollow = async (req, res) => {
+const removeFollower = async (req, res) => {
   // user1 ke followers main
 
-  const username1 = req.decodedToken.username;
-  const username2 = req.body.username2;
+  const username1 = req.body.username1;
+  const username2 = req.decodedToken.username;
 
   try {
     const user1 = await usermodel.findOne({ username: username1 });
@@ -27,4 +27,4 @@ const unFollow = async (req, res) => {
   }
 };
 
-export default unFollow;
+export default removeFollower;

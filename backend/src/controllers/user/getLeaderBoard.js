@@ -5,7 +5,8 @@ const getLeaderBoard = async (req, res) => {
   try {
     const users = await User.find({})
       .select(["username", "rank", "-_id"])
-      .sort({ rank: 1 });
+      .sort({ rank: 1 })
+      .limit(10);
     if (!users) {
       throw httpError("No users found");
     }

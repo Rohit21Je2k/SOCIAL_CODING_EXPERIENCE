@@ -5,3 +5,4 @@ export { default as getFollowing } from "./getFollowing.js";
 export { default as search } from "./search.js";
 export { default as getLeaderBoard } from "./getLeaderBoard.js";
 export { default as getUsers } from "./getUsers.js";
+export { default as removeFollower } from "./removeFollower.js";

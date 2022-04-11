@@ -1,7 +1,5 @@
 import { Router } from "express";
 
-// import { getUsers } from "../controllers/user-controller.js";
-
 import {
   getDashboard,
   follow,
@@ -10,6 +8,7 @@ import {
   search,
   getLeaderBoard,
   getUsers,
+  removeFollower,
 } from "../controllers/user/_index.js";
 
 import { isValidToken } from "../middleware/validators/_index.js";
@@ -26,6 +25,7 @@ router.get("/leaderboard", getLeaderBoard);
 
 router.post("/follow", isValidToken, follow);
 router.post("/unfollow", isValidToken, unFollow);
+router.post("/removefollower", isValidToken, removeFollower);
 router.get("/following/:username", getFollowing);
 
 export default router;

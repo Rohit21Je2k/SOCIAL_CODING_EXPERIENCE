@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import FollowCard from "./FollowCard";
 import Card from "../../ui/Card/Card";
-import unfollow from "../../util/api/unfollow";
+import { removeFollower } from "../../util/api";
 import { AuthContext } from "../../util/context/AuthContext";
 
 import "./Followers.css";
@@ -11,7 +11,7 @@ export default function Followers(props) {
 
   const handleClick = (followUsername, index) => {
     return async () => {
-      await unfollow(followUsername, user.username, token);
+      await removeFollower(followUsername, user.username, token);
       setData((prevData) => {
         prevData.followers = prevData.followers.filter((v, ind) => {
           return ind != index;

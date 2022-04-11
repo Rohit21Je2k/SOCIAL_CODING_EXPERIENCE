@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../../util/context/AuthContext";
-import Loader from "../Loader/Loader";
+import { AuthContext } from "../util/context/AuthContext";
+import Loader from "../components/Loader/Loader";
 import FriendCard from "./FriendCard";
-import apiUrl from "../../api";
+import apiUrl from "../api";
 
 import "./Friends.css";
 

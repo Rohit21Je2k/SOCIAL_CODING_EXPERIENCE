@@ -1,7 +1,6 @@
 import apiUrl from "../../api";
 
 const getDashboard = async (username, loggedUser) => {
-  console.log("dasda");
   try {
     const response = await fetch(`${apiUrl}/api/users/dashboard/${username}`, {
       method: "POST",

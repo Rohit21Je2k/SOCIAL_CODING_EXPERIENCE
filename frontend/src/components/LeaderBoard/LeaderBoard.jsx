@@ -50,9 +50,13 @@ export default function LeaderBoard(props) {
       <div className="wrapper">
         <h2>Leaderboard</h2>
         <div className="container">
-          {userList.map((user) => {
+          {userList.map((user, index) => {
             return (
-              <LeaderBoardCard username={user.username} rank={user.rank} />
+              <LeaderBoardCard
+                key={index}
+                username={user.username}
+                rank={user.rank}
+              />
             );
           })}
         </div>
@@ -69,7 +73,7 @@ function LeaderBoardCard(props) {
         <img src={person} />
       </span>
       <h3 className="mw-100">{username}</h3>
-      <h4>Rank: {rank}</h4>
+      <h4>Rank: {Math.floor(rank)}</h4>
     </div>
   );
 }
