@@ -25,15 +25,15 @@ const getDashboard = async (req, res) => {
       const github_username = existingUser.github.username;
       const leetcode_username = existingUser.leetcode.username;
       const codechef_username = existingUser.codechef.username;
-      const leetcode_data = fetchLeetCode(leetcode_username);
-      const github_data = fetchGithub(github_username);
-      const codechef_data = fetchCodeChef(req.browser, codechef_username);
-      const data = await Promise.all([
-        leetcode_data,
-        github_data,
-        codechef_data,
-      ]);
-      console.log(data);
+      const leetcode_data = await fetchLeetCode(leetcode_username);
+      const github_data = await fetchGithub(github_username);
+      const codechef_data = await fetchCodeChef(req.browser, codechef_username);
+      // const data = await Promise.all([
+      //   leetcode_data,
+      //   github_data,
+      //   codechef_data,
+      // ]);
+      // console.log(data);
       const leetcode_rank = leetcode_data.profileRank;
       const codechef_rank =
         codechef_data.globalRank == "Inactive"
