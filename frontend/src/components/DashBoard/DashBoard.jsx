@@ -6,6 +6,7 @@ import DisplayBox from "../DisplayBox/DisplayBox";
 import Profile from "../Profile/Profile";
 import { getDashboard } from "../../util/api";
 import { AuthContext } from "../../util/context/AuthContext";
+import FollowBtn from "../FollowBtn/FollowBtn";
 
 import person from "../../assets/person.png";
 import "./DashBoard.css";
@@ -20,17 +21,24 @@ export default function DashBoard() {
   // states
   const [loading, setLoading] = useState(true);
   const [userDetails, setUserDetails] = useState(null);
-  const { name, username, rank, github, leetcode, codechef } =
+  const { name, username, rank, github, leetcode, codechef, followStatus } =
     userDetails || {};
   const [profileNum, setProfileNum] = useState(1);
 
   // useEffect
   useEffect(async () => {
+    if (!loggedUser?.username) {
+      return;
+    }
     setLoading(true);
-    const userData = await getDashboard(requiredUser);
-    setUserDetails(userData);
+    const userData = await getDashboard(requiredUser, loggedUser.username);
+    if (!userData) {
+      setUserDetails({});
+    } else {
+      setUserDetails(userData);
+    }
     setLoading(false);
-  }, [requiredUser]);
+  }, [requiredUser, loggedUser]);
 
   const handleClick = (index) => {
     return () => {
@@ -43,7 +51,7 @@ export default function DashBoard() {
       <div className="wrapper">
         {loading ? (
           <Loader />
-        ) : (
+        ) : userDetails.username ? (
           <>
             <div className="dashboard__user">
               <span>
@@ -52,6 +60,7 @@ export default function DashBoard() {
               <h2>{name}</h2>
               <p>Username: {username}</p>
               <p>Rank : {rank}</p>
+              <FollowBtn status={followStatus} followUsername={requiredUser} />
             </div>
             <div className="dashboard__profiles">
               <button
@@ -92,6 +101,8 @@ export default function DashBoard() {
               <Profile profile="codechef" details={codechef} />
             </DisplayBox>
           </>
+        ) : (
+          <></>
         )}
       </div>
     </div>

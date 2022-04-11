@@ -14,7 +14,7 @@ import { isValidToken } from "../middleware/validators/_index.js";
 
 const router = Router();
 
-router.get("/dashboard/:username", getDashboard);
+router.post("/dashboard/:username", getDashboard);
 
 router.get("/users", getUsers);
 
