@@ -15,7 +15,7 @@
   text-decoration: none;
 }
 
-.navbar-desktop__link:hover::after {
+.navbar-desktop__link::after {
   content: "";
   display: block;
   position: absolute;
@@ -24,4 +24,13 @@
   width: 100%;
   height: 3px;
   background-color: rgb(14, 167, 238);
+  opacity: 0;
+}
+
+.navbar-desktop__link.selected::after {
+  opacity: 1;
+}
+
+.navbar-desktop__link:hover::after {
+  opacity: 1;
 }

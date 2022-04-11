@@ -15,7 +15,7 @@ import CreateAccount from "./components/CreateAccount/CreateAccount";
 // import Friends from "./components/Friends/Friends";
 import Follow from "./components/Follow/Follow";
 import Login from "./components/Login/Login";
-import LeaderBoards from "./components/LeaderBoard/LeaderBoards";
+import LeaderBoard from "./components/LeaderBoard/LeaderBoard";
 import Search from "./components/Search/Search";
 
 import "./ui/styles/main.css";
@@ -42,11 +42,11 @@ function App() {
             <Route path="/" element={<Home />} />
             {token && (
               <>
-                <Route path="/leaderboard" element={<LeaderBoards />} />
+                <Route path="/groups" element={<Groups />} />
                 <Route path="/follow" element={<Follow />} />
               </>
             )}
-            <Route path="/groups" element={<Groups />} />
+            <Route path="/leaderboard" element={<LeaderBoard />} />
             <Route path="/search" element={<Search />} />
             <Route path="/signup" element={<CreateAccount />} />
             <Route path="/dashboard/:username" element={<DashBoard />} />

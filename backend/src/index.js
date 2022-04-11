@@ -47,7 +47,7 @@ app.use("/api/users", addBrowser, userRouter);
 
 // path not found
 app.use((req, res) => {
-  res.send(httpError("path does not exist"));
+  res.status(400).send(httpError("path does not exist"));
 });
 
 // connect mongoose

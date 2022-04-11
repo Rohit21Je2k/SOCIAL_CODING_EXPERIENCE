@@ -6,50 +6,9 @@ import User from "../models/user.js";
 
 const JWT_KEY = "supersecret_dontshare";
 
-export const getUser = async (req, res, next) => {
-  // validate inputs
-  const errors = validationResult(req);
-  if (!errors.isEmpty())
-    return res.status(422).send({
-      message: "Invalid Inputs",
-    });
-
-  // extract inputs
-  const { email } = req.body;
-
-  // find user
-  let user;
-  try {
-    user = await User.findOne({ email: email }, "-password");
-  } catch (err) {
-    return res.status(500).send({
-      message: "Server Error",
-    });
-  }
-
-  if (!user) {
-    return res.status(500).send({
-      message: "No User Found",
-    });
-  }
-
-  //   send response back
-  res.status(201).json(user);
-};
-
 export const getUsers = async (req, res, next) => {
-  let users;
-  try {
-    users = await User.find({}, "-password");
-  } catch (err) {
-    return res.status(500).send({
-      message: "Server Error",
-    });
-  }
-  res.status(200).json({ users: users });
-  //   res
-  //     .status(200)
-  //     .json({ users: users.map((user) => user.toObject({ getters: true })) });
+  users = await User.find({});
+  res.status(200).json({ users });
 };
 
 export const signup = async (req, res, next) => {

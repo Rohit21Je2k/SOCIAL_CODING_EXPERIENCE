@@ -18,7 +18,10 @@ const getDashboard = async (req, res) => {
 
     // search user
     const existingUser = await User.findOne({ username });
-    const user2 = await User.findOne({ username: loggedUser });
+    let user2;
+    if (!user2) {
+      user2 = await User.findOne({ username: loggedUser });
+    }
     // if user not found
     if (!existingUser) {
       throw httpError("User not found");

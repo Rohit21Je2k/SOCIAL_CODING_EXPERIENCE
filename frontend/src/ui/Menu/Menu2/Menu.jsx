@@ -2,8 +2,8 @@ import React from "react";
 import { menu, menuBtn, selected } from "./Menu.module.css";
 
 function Menu(props) {
-  const { children } = props;
-  return <div className={menu}>{children}</div>;
+  const { className, children } = props;
+  return <div className={`${menu} ${className}`}>{children}</div>;
 }
 
 function Item(props) {
