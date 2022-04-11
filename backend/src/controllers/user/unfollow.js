@@ -2,8 +2,8 @@ import usermodel from "../../models/user.js";
 
 const unFollow = async (req, res) => {
   // user1 ke followers main
-
-  const username1 = req.body.username1;
+  console.log(req.decodedToken);
+  const username1 = req.decodedToken.username;
   const username2 = req.body.username2;
 
   try {
@@ -19,7 +19,7 @@ const unFollow = async (req, res) => {
 
       return res.status(200).json({ message: "unfollowed him now" });
     } else {
-      res.status(200).json({ message: "not  following him already " });
+      res.status(200).json({ message: "not following him already" });
     }
   } catch (err) {
     console.log(err);

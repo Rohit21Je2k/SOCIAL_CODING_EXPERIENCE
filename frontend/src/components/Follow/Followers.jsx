@@ -7,11 +7,11 @@ import { AuthContext } from "../../util/context/AuthContext";
 import "./Followers.css";
 export default function Followers(props) {
   const { data, setData } = props;
-  const { user } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
 
   const handleClick = (followUsername, index) => {
     return async () => {
-      await unfollow(followUsername, user.username);
+      await unfollow(followUsername, user.username, token);
       setData((prevData) => {
         prevData.followers = prevData.followers.filter((v, ind) => {
           return ind != index;

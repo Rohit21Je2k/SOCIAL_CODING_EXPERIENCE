@@ -1,7 +1,8 @@
 import usermodel from "../../models/user.js";
 
 const follow = async (req, res, next) => {
-  const username1 = req.body.username1;
+  console.log(req.decodedToken);
+  const username1 = req.decodedToken.username;
   const username2 = req.body.username2;
   try {
     const user1 = await usermodel.findOne({ username: username1 });

@@ -1,5 +1,5 @@
 import apiUrl from "../../api";
-const unfollow = async (username1, username2) => {
+const unfollow = async (username1, username2, token) => {
   try {
     const url = apiUrl + "/api/users/unfollow/";
     await fetch(url, {
@@ -8,7 +8,10 @@ const unfollow = async (username1, username2) => {
         username1,
         username2,
       }),
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
     });
   } catch (err) {
     console.log(err);
