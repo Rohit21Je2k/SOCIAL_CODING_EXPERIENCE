@@ -78,11 +78,11 @@ export function useAuth() {
         if (token) {
           authorize(details);
         }
+        return "success";
       } catch (err) {
         console.log(err);
-        if (err.error) {
-          alert(err);
-        }
+        alert(err);
+        return null;
       }
     },
     []

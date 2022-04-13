@@ -59,7 +59,7 @@ const getDashboard = async (req, res) => {
         codechef_data.globalRank == "Inactive"
           ? 500_000
           : codechef_data.globalRank;
-      const rank = (leetcode_rank + codechef_rank) / 2;
+      const rank = (Number(leetcode_rank) + Number(codechef_rank)) / 2;
 
       // update profile data
       if (leetcode_data) {

@@ -31,10 +31,19 @@ export default function CreateAccount() {
       codechefID,
     });
 
-    await signup(name, username, password, githubID, leetcodeID, codechefID);
+    const res = await signup(
+      name,
+      username,
+      password,
+      githubID,
+      leetcodeID,
+      codechefID
+    );
     form.reset();
     setLoading(false);
-    navigate("/");
+    if (res) {
+      navigate("/");
+    }
   };
   return (
     <div className="create-account">
