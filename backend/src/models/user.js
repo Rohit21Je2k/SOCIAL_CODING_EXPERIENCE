@@ -46,6 +46,20 @@ const userSchema = new Schema({
 
   following: Array,
 
+  groups: [
+    {
+      id: String,
+      name: String,
+    },
+  ],
+
+  groupRequests: [
+    {
+      groupId: String,
+      username: String,
+    },
+  ],
+
   nextUpdateCycle: { type: Number, required: true },
 });
 

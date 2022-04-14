@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import userRouter from "./routes/user-routes.js";
 import authRouter from "./routes/auth-routes.js";
+import groupRouter from "./routes/groups-routes.js";
 
 import puppeteer from "puppeteer";
 import { Server } from "socket.io";
@@ -59,6 +60,9 @@ app.use("/api/auth", authRouter);
 
 // user
 app.use("/api/users", addBrowser, userRouter);
+
+// groups
+app.use("/api/groups", groupRouter);
 
 // path not found
 app.use((req, res) => {

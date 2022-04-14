@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import getMenu from "../../ui/Menu";
 import AllGroups from "./AllGroups";
+import AddGroup from "./AddGroup";
 
 export default function Groups() {
   const Menu = getMenu(2);
@@ -35,6 +36,7 @@ export default function Groups() {
           </Menu.Item>
         </Menu>
         {selected === 1 && <AllGroups />}
+        {selected === 2 && <AddGroup />}
       </div>
     </div>
   );
