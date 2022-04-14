@@ -41,7 +41,7 @@ export default function AddGroup() {
       <div className="wrapper">
         <form onSubmit={handleSubmit}>
           <Input
-            label="Enter Groupname"
+            label="Search Group Name"
             type="text"
             name="groupname"
             placeholder="Enter groupname..."
