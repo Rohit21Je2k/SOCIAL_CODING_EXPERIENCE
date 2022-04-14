@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { io } from "socket.io-client";
 import Card from "../../ui/Card/Card";
 import Input from "../../ui/Input/Input";
+import { AuthContext } from "../../util/context/AuthContext";
 
 import apiUrl from "../../api";
 
 import "./GroupsChat.css";
 
 export default function GroupsChat(props) {
+  const { user } = useContext(AuthContext);
+  const { username } = user;
   const { name, id: roomId } = props;
 
   const [messages, setMessages] = useState([]);
@@ -23,9 +26,10 @@ export default function GroupsChat(props) {
     socket.emit("join-room", roomId);
 
     // receive
-    socket.on("receive-message", (msg) => {
+    socket.on("receive-message", (msg, user) => {
+      console.log(user);
       setMessages((prevMsgs) => {
-        return [msg, ...prevMsgs];
+        return [{ msg, user }, ...prevMsgs];
       });
     });
 
@@ -37,12 +41,12 @@ export default function GroupsChat(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    const text = form.text.value;
+    const msg = form.text.value;
     form.reset();
     // send message
-    socket.emit("send-message", text, roomId);
+    socket.emit("send-message", msg, username, roomId);
     setMessages((prevMsgs) => {
-      return [text, ...prevMsgs];
+      return [{ msg, user: username }, ...prevMsgs];
     });
   };
 
@@ -51,8 +55,13 @@ export default function GroupsChat(props) {
       <Card className="group-chat-card">
         <h3>{name}</h3>
         <div className="groups-chat-messages">
-          {messages.map((msg, index) => {
-            return <p key={index}>{msg}</p>;
+          {messages.map((msgs, index) => {
+            return (
+              <div className="msg_pill" key={index}>
+                <p>{msgs.msg}</p>
+                <span>sent by {msgs.user}</span>
+              </div>
+            );
           })}
         </div>
         <form onSubmit={handleSubmit}>

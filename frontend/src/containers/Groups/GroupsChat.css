@@ -20,11 +20,15 @@
   overflow-y: scroll;
 }
 
-.groups-chat-messages p {
+.msg_pill {
   padding: 10px;
   border-radius: 5px;
 }
 
-.groups-chat-messages p:nth-child(even) {
+.msg_pill span {
+  font-size: 12px;
+}
+
+.msg_pill:nth-child(even) {
   background-color: rgb(120, 179, 206);
 }
