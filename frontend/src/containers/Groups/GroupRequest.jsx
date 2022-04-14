@@ -64,26 +64,30 @@ export default function GroupRequest() {
   return (
     <div className="group-requests">
       <div className="wrapper">
-        {groupRequests.map((request, index) => {
-          return (
-            <div key={index} className="follow_card">
-              <span>
-                <img src={groupPNG} />
-              </span>
-              <h3>Name : {request.username}</h3>
-              <button
-                onClick={sendAcceptRequest(
-                  request.groupId,
-                  request.username,
-                  index
-                )}
-                className="btn"
-              >
-                Accept
-              </button>
-            </div>
-          );
-        })}
+        {groupRequests.length === 0 ? (
+          <Card className="error_card">No request Found</Card>
+        ) : (
+          groupRequests.map((request, index) => {
+            return (
+              <div key={index} className="follow_card">
+                <span>
+                  <img src={groupPNG} />
+                </span>
+                <h3>Name : {request.username}</h3>
+                <button
+                  onClick={sendAcceptRequest(
+                    request.groupId,
+                    request.username,
+                    index
+                  )}
+                  className="btn"
+                >
+                  Accept
+                </button>
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
   );
