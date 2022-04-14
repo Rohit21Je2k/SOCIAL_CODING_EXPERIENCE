@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+import http from "http";
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -9,7 +10,9 @@ import userRouter from "./routes/user-routes.js";
 import authRouter from "./routes/auth-routes.js";
 
 import puppeteer from "puppeteer";
+import { Server } from "socket.io";
 import { httpError } from "./util/functions/_index.js";
+import chat from "./controllers/chat.js";
 
 const PORT = process.env.PORT;
 const DB_USER = process.env.DB_USER;
@@ -17,8 +20,20 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 const DB_NAME = process.env.DB_NAME;
 
 const app = express();
-
 app.use(cors());
+
+// web socket
+const server = http.createServer(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
+
+// chatroom
+chat(io);
 
 const browser = await puppeteer.launch({
   headless: true,
@@ -57,7 +72,7 @@ mongoose
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => {
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       console.log("connection to server and database established");
     });
   })

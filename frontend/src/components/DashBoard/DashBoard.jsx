@@ -79,7 +79,7 @@ export default function DashBoard() {
           </span>
           <h2>{name}</h2>
           <p>Username: {username}</p>
-          <p>Rank : {rank}</p>
+          <p>Rank : {Math.floor(rank)}</p>
           <FollowBtn status={followStatus} followUsername={requiredUser} />
         </div>
 

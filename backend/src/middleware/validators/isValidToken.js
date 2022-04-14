@@ -11,6 +11,9 @@ const validator = async (req, res, next) => {
       throw httpError("Invalid token");
     }
     const decodedToken = jwt.verify(token, process.env.JWT_KEY);
+    if (!decodedToken) {
+      throw httpError("Invalid token");
+    }
     req.decodedToken = decodedToken;
     next();
   } catch (err) {
