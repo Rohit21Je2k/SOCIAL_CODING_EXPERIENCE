@@ -5,11 +5,11 @@ import httpError from "../../util/functions/httpError.js";
 const createGroup = async (req, res) => {
   try {
     const { groupName } = req.body;
+    const { username: admin } = req.decodedToken;
     if (!groupName || groupName === "") {
       throw httpError("invalid group name");
     }
 
-    const { username: admin } = req.body;
     const existingUser = await User.findOne({ username: admin });
     if (!existingUser) {
       throw httpError("user not found");

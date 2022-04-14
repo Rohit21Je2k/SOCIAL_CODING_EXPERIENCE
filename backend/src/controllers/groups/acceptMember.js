@@ -5,7 +5,7 @@ import httpError from "../../util/functions/httpError.js";
 const acceptMember = async (req, res) => {
   try {
     const { groupId, requestedUser } = req.body;
-    const { username: adminUsername } = req.body;
+    const { username: adminUsername } = req.decodedToken;
 
     if (!groupId || groupId === "") {
       throw httpError("invalid groupId");
