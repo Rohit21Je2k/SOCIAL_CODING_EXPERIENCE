@@ -17,20 +17,24 @@
 
 <!-- PROJECT LOGO -->
 <br />
-<div id="top" align="center">
-  <a href="https://github.com/Rohit21Je2k/NullPointerException_1_SOCIAL_CODING_EXPERIENCE">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-  <h3 align="center">Social Coding Experience</h3>
-  <p align="center">
-    An awesome website created for developers to hangout, meet and interact with other developers and also showcase their coding skills.
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+<div id="top">
+    <div align="center">
+        <a href="https://github.com/Rohit21Je2k/NullPointerException_1_SOCIAL_CODING_EXPERIENCE">
+        <img src="images/logo.png" alt="Logo" width="80" height="80">
+        </a>
+    </div>
+    <h3 align="center">Social Coding Experience</h3>
+    <p style="max-width: 700px; margin: 0 auto">
+        An awesome website created for developers to hangout, meet and interact with other developers and also showcase their coding skills.
+    </p>
+    <br/>
+    <div align="center">
+    <a href="https://socialcoding.netlify.app/">View Demo</a>
     ·
     <a href="https://github.com/Rohit21Je2k/NullPointerException_1_SOCIAL_CODING_EXPERIENCE/issues">Report Bug</a>
     ·
     <a href="https://github.com/Rohit21Je2k/NullPointerException_1_SOCIAL_CODING_EXPERIENCE/issues">Request Feature</a>
-  </p>
+    </div>
 </div>
 
 <!-- TABLE OF CONTENTS -->
