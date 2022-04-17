@@ -104,16 +104,55 @@ Here are the features we have implemented in our website
 
 - We have also deployed out app on Netlify(Frontend) and Heroku(Backend)
 
-* [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
-* [React.js](https://reactjs.org/)
-* [Node.js](https://nodejs.org/en/)
-* [Express.js](https://expressjs.com/)
-* [MongoDB](https://www.mongodb.com/)
-* [Netlify](https://www.netlify.com/)
-* [Heroku](https://www.heroku.com)
-* [Git](https://git-scm.com/)
+<br />
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<div style="display:flex; align-items: center; gap: 15px; flex-wrap: wrap">
+<!-- HTML -->
+<a href="https://www.w3.org/Style/CSS/Overview.en.html" style="display:flex; gap: 8px">
+<img src="images/icons/html.svg" width="24px" height="24px">
+HTML
+</a>
+<!-- CSS -->
+<a href="https://www.w3.org/Style/CSS/Overview.en.html" style="display:flex; gap: 8px">
+<img src="images/icons/css.svg" width="24px" height="24px">
+CSS
+</a>
+<!-- ReactJS -->
+<a href="https://reactjs.org/" style="display:flex; gap: 8px">
+<img src="images/icons/react.svg" width="24px" height="24px">
+ReactJS
+</a>
+<!-- NodeJS -->
+<a href="https://reactjs.org/" style="display:flex; gap: 8px">
+<img src="images/icons/nodejs.svg" width="24px" height="24px">
+NodeJS
+</a>
+<!-- ExpressJS -->
+<a href="https://reactjs.org/" style="display:flex; gap: 8px">
+<img src="images/icons/express.svg" width="24px" height="24px">
+ExpressJS
+</a>
+<!-- MongoDB -->
+<a href="https://reactjs.org/" style="display:flex; gap: 8px">
+<img src="images/icons/mongodb.svg" width="24px" height="24px">
+MongoDB
+</a>
+<!-- ReactJS -->
+<a href="https://reactjs.org/" style="display:flex; gap: 8px">
+<img src="images/icons/netlify.svg" width="24px" height="24px">
+Netlify
+</a>
+<!-- ReactJS -->
+<a href="https://reactjs.org/" style="display:flex; gap: 8px">
+<img src="images/icons/heroku.svg" width="24px" height="24px">
+Heroku
+</a>
+<!-- ReactJS -->
+<a href="https://reactjs.org/" style="display:flex; gap: 8px">
+<img src="images/icons/git.svg" width="24px" height="24px">
+Git
+</a>
+</div>
 
 <!-- GETTING STARTED -->
 
