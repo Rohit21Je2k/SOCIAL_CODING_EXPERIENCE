@@ -27,7 +27,6 @@
     <p style="max-width: 700px; margin: 0 auto">
         An awesome website created for developers to hangout, meet and interact with other developers and also showcase their coding skills.
     </p>
-    <br/>
     <div align="center">
     <a href="https://socialcoding.netlify.app/">View Demo</a>
     ·
@@ -69,40 +68,50 @@
 
 <img src="images/home.png" alt="home">
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-
-- Your time should be focused on creating something amazing. A project that solves a problem and helps others
-- You shouldn't be doing the same tasks over and over like creating a README from scratch
-- You should implement DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Use the `BLANK_README.md` to get started.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-### Built With
-
-Below are the technologies we have used to build our project.
 <br />
-For Frontend we went with REACTJS, which is a component based library and focuses a lot on resuability of the code.
-<br />
-For Backend we went NODEJS, which enabled the same developers to easily work on both the frontend and backend.
-<br />
-For Database we went with mongoDB, which is a no-sql database, which provided us with flexibility in our schema as we were building the project.
-<br />
-We have also deployed out app on Netlify(Frontend) and Heroku(Backend)
 
-- [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
-- [React.js](https://reactjs.org/)
-- [Node.js](https://nodejs.org/en/)
-- [Express.js](https://expressjs.com/)
-- [MongoDB](https://www.mongodb.com/)
-- [Netlify](https://www.netlify.com/)
-- [Heroku](https://www.heroku.com)
-- [Git](https://git-scm.com/)
+Social Coding Experience was built to make interaction between developers easy.
+
+Here are the features we have implemented in our website
+
+- **Search:**
+  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+- **LeaderBoard:**
+  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+- **LeaderBoard:**
+  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+- **DashBoard:**
+  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+- **Follow:**
+  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+- **Groups:**
+  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+### Built using
+
+- Below are the technologies we have used to build our project.
+
+- For Frontend we went with REACTJS, which is a component based library and focuses a lot on resuability of the code.
+
+- For Backend we went NODEJS, which enabled the same developers to easily work on both the frontend and backend.
+
+- For Database we went with mongoDB, which is a no-sql database, which provided us with flexibility in our schema as we were building the project.
+
+- We have also deployed out app on Netlify(Frontend) and Heroku(Backend)
+
+* [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
+* [React.js](https://reactjs.org/)
+* [Node.js](https://nodejs.org/en/)
+* [Express.js](https://expressjs.com/)
+* [MongoDB](https://www.mongodb.com/)
+* [Netlify](https://www.netlify.com/)
+* [Heroku](https://www.heroku.com)
+* [Git](https://git-scm.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
