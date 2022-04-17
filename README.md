@@ -104,55 +104,15 @@ Here are the features we have implemented in our website
 
 - We have also deployed out app on Netlify(Frontend) and Heroku(Backend)
 
-<br />
-
-<div>
-<!-- HTML -->
-<a href="https://www.w3.org/Style/CSS/Overview.en.html" style="margin-right: 15px">
-<img src="images/icons/html.svg" width="24px" height="24px">
-HTML
-</a>
-<!-- CSS -->
-<a href="https://www.w3.org/Style/CSS/Overview.en.html" style="margin-right: 15px">
-<img src="images/icons/css.svg" width="24px" height="24px">
-CSS
-</a>
-<!-- ReactJS -->
-<a href="https://reactjs.org/" style="margin-right: 15px">
-<img src="images/icons/react.svg" width="24px" height="24px">
-ReactJS
-</a>
-<!-- NodeJS -->
-<a href="https://reactjs.org/" style="margin-right: 15px">
-<img src="images/icons/nodejs.svg" width="24px" height="24px">
-NodeJS
-</a>
-<!-- ExpressJS -->
-<a href="https://reactjs.org/" style="margin-right: 15px">
-<img src="images/icons/express.png" width="24px" height="24px">
-ExpressJS
-</a>
-<!-- MongoDB -->
-<a href="https://reactjs.org/" style="margin-right: 15px">
-<img src="images/icons/mongodb.svg" width="24px" height="24px">
-MongoDB
-</a>
-<!-- ReactJS -->
-<a href="https://reactjs.org/" style="margin-right: 15px">
-<img src="images/icons/netlify.svg" width="24px" height="24px">
-Netlify
-</a>
-<!-- ReactJS -->
-<a href="https://reactjs.org/" style="margin-right: 15px">
-<img src="images/icons/heroku.svg" width="24px" height="24px">
-Heroku
-</a>
-<!-- ReactJS -->
-<a href="https://reactjs.org/" style="margin-right: 15px">
-<img src="images/icons/git.svg" width="24px" height="24px">
-Git
-</a>
-</div>
+![HTML](/images/icons/html.svg) [HTML](https://www.w3schools.com/html/)
+![CSS](/images/icons/css.svg) [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
+![ReactJS](/images/icons/react.svg) [ReactJS](https://reactjs.org/)
+![NodeJS](/images/icons/nodejs.svg) [NodeJS](https://nodejs.org/en/)
+![Express](/images/icons/express.png) [ExpressJS](https://expressjs.com/)
+![MongoDB](/images/icons/mongodb.svg) [MongoDB](https://www.mongodb.com)
+![Netlify](/images/icons/netlify.svg) [Netlify](https://www.netlify.com/)
+![Heroku](/images/icons/heroku.svg) [Heroku](https://www.heroku.com)
+![Git](/images/icons/git.svg) [Git](https://git-scm.com/)
 
 <!-- GETTING STARTED -->
 
