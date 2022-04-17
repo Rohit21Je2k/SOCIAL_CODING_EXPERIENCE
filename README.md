@@ -106,7 +106,7 @@ Here are the features we have implemented in our website
 
 <br />
 
-<div style="display:flex; align-items: center; gap: 15px; flex-wrap: wrap">
+<div style="display:flex; gap: 15px; flex-wrap: wrap; line-height: 24px">
 <!-- HTML -->
 <a href="https://www.w3.org/Style/CSS/Overview.en.html" style="display:flex; gap: 8px">
 <img src="images/icons/html.svg" width="24px" height="24px">
@@ -129,7 +129,7 @@ NodeJS
 </a>
 <!-- ExpressJS -->
 <a href="https://reactjs.org/" style="display:flex; gap: 8px">
-<img src="images/icons/express.svg" width="24px" height="24px">
+<img src="images/icons/express.svg" width="80px" height="24px">
 ExpressJS
 </a>
 <!-- MongoDB -->
