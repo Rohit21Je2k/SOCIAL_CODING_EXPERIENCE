@@ -7,14 +7,7 @@ export function useAuth() {
   const [token, setToken] = useState();
   const [tokenExpirationDate, setTokenExpirationDate] = useState();
 
-  const authorize = (
-    name,
-    email,
-    github_username,
-    leetcode_username,
-    codechef_username,
-    token
-  ) => {
+  const authorize = (details) => {
     //   calculate token expiration time
     const tokenValidity = 1000 * 60 * 60; // 1 hour
     const currentDate = Date.now();
@@ -24,25 +17,14 @@ export function useAuth() {
     localStorage.setItem(
       "userData",
       JSON.stringify({
-        name: name,
-        email: email,
-        github_username,
-        leetcode_username,
-        codechef_username,
-        token: token,
+        ...details,
         expiration: tokenExpirationDate,
       })
     );
 
     // update state
-    setUser({
-      name: name,
-      email: email,
-      github_username,
-      leetcode_username,
-      codechef_username,
-    });
-    setToken(token);
+    setUser({ ...details });
+    setToken(details.token);
     setTokenExpirationDate(tokenExpirationDate);
   };
 
@@ -56,18 +38,18 @@ export function useAuth() {
   const signup = useCallback(
     async (
       name,
-      email,
+      username,
       password,
       github_username,
       leetcode_username,
       codechef_username
     ) => {
       try {
-        let reqUrl = `${apiUrl}/api/users/signup`;
+        let reqUrl = `${apiUrl}/api/auth/signup`;
 
         let reqFormValues = {
           name,
-          email,
+          username,
           password,
           github_username,
           leetcode_username,
@@ -83,37 +65,37 @@ export function useAuth() {
         });
 
         const responseData = await response.json();
-        const { message, token } = responseData;
-        if (message) {
-          alert(message);
+        const { error, token } = responseData;
+        if (error) {
+          throw error;
         }
 
+        const details = {
+          username,
+          token,
+        };
+
         if (token) {
-          authorize(
-            name,
-            email,
-            github_username,
-            leetcode_username,
-            codechef_username,
-            token
-          );
+          authorize(details);
         }
+        return "success";
       } catch (err) {
-        alert(err);
         console.log(err);
+        alert(err);
+        return null;
       }
     },
     []
   );
 
-  const signin = useCallback(async (email, password) => {
+  const signin = useCallback(async (username, password) => {
     try {
       const reqFormValues = {
-        email,
+        username,
         password,
       };
 
-      const reqUrl = `${apiUrl}/api/users/login`;
+      const reqUrl = `${apiUrl}/api/auth/login`;
 
       const response = await fetch(reqUrl, {
         method: "POST",
@@ -123,31 +105,23 @@ export function useAuth() {
         },
       });
       const responseData = await response.json();
-      const {
-        message,
-        name,
-        token,
-        github_username,
-        leetcode_username,
-        codechef_username,
-      } = responseData;
-      console.log(responseData);
-      if (message) {
-        alert(message);
+      const { error, token } = responseData;
+
+      if (error) {
+        throw error;
       }
+
+      const details = {
+        username,
+        token,
+      };
+
       if (token) {
-        authorize(
-          name,
-          email,
-          github_username,
-          leetcode_username,
-          codechef_username,
-          token
-        );
+        authorize(details);
       }
     } catch (err) {
-      alert("Fetching Error");
       console.log(err);
+      alert(err || "Some error occured");
     }
   }, []);
 
@@ -173,11 +147,11 @@ export function useAuth() {
       storedData.token &&
       new Date(storedData.expiration) > new Date()
     ) {
-      setUser({ email: storedData.email });
+      setUser({ ...storedData });
       setToken(storedData.token);
       setTokenExpirationDate(storedData.expiration);
     }
   }, []);
 
-  return { user, token, signup, signin, signout };
+  return { user, setUser, token, signup, signin, signout };
 }

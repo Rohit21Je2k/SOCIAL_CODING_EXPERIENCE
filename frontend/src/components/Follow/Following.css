@@ -1,0 +1,12 @@
+.following {
+  padding: 30px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+.following .empty_card {
+  width: 250px;
+  margin: 0 auto;
+  text-align: center;
+}

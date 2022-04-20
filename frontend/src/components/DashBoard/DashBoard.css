@@ -3,6 +3,16 @@
   padding: 20px 0;
 }
 
+.dashboard_error-card {
+  padding: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  color: gray;
+  text-align: center;
+  width: 400px;
+  margin: 0 auto;
+}
+
 .dashboard__user {
   padding: 30px 0;
   display: grid;
@@ -41,35 +51,19 @@
   font-size: 16px;
   font-weight: 600;
   color: rgba(255, 255, 255, 1);
-}
-
-.dashboard__profiles {
-  margin-top: 30px;
-  margin-bottom: 20px;
-  display: flex;
-  padding-bottom: 16px;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
-  gap: 30px;
-}
-
-.dashboard__profiles__menu {
-  padding: 10px;
-  border: 0;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  opacity: 0.6;
   cursor: pointer;
-  background: none;
 }
 
-.dashboard__profiles__menu.selected,
-.dashboard__profiles__menu:hover {
-  background-color: rgb(14, 167, 238, 0.7);
+.dashboard_profile_menu {
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid rgb(185, 185, 185);
 }
 
-.dashboard__profile_iframe {
-  border: 0;
-  width: 664px;
-  height: 105px;
+.m-t-20 {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: gray;
 }

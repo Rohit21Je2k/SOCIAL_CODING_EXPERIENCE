@@ -2,6 +2,10 @@
   padding: 30px 0;
 }
 
+.leaderBoard h2 {
+  margin-bottom: 30px;
+}
+
 .leaderBoard .wrapper {
   display: flex;
   flex-direction: column;
@@ -9,22 +13,28 @@
 }
 
 .leaderBoard .container {
-  margin-top: 30px;
+  min-width: 110px;
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
 
 .leaderBoard_card {
-  padding: 10px 30px;
-  max-width: 500px;
+  padding: 20px 30px;
+  max-width: 450px;
   border-radius: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: repeat(4, 30px);
+  grid-template-rows: repeat(4, 20px);
   row-gap: 15px;
   column-gap: 20px;
+}
+
+.mw-100 {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .leaderBoard_card span {

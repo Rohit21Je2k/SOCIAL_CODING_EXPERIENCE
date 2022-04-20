@@ -1,22 +1,46 @@
 import React from "react";
+import extractGithub from "./extractGithub";
+import extractLeetCode from "./extractLeetCode";
+import extractCodeChef from "./extractCodechef";
 
 import "./Profile.css";
 
-export default function Profile() {
+export default function Github(props) {
+  const { profile, details } = props;
+  let userData;
+  if (profile == "leetcode") {
+    userData = extractLeetCode(details);
+  }
+
+  if (profile == "github") {
+    userData = extractGithub(details);
+  }
+
+  if (profile == "codechef") {
+    userData = extractCodeChef(details);
+  }
+
   return (
-    <div className="profile">
-      <div className="profile_details_card">
-        <h3>Rating</h3>
-        <p>120</p>
-      </div>
-      <div className="profile_details_card">
-        <h3>Activity</h3>
-        <iframe
-          className="dashboard__profile_iframe"
-          src="https://ghchart.rshah.org/anuj12122000"
-          title="W3Schools Free Online Web Tutorials"
-        ></iframe>
-      </div>
+    <div className="github profile">
+      {userData?.map((detail, index) => {
+        const el = (
+          <div key={index} className="profile_details_card">
+            <h3>{detail.title}</h3>
+            {detail.type === "String" && <p>{detail.value}</p>}
+            {detail.type === "iframe" && (
+              <iframe
+                className="dashboard__profile_iframe"
+                src={detail.value}
+              ></iframe>
+            )}
+            {detail.type === "Array" &&
+              detail?.value?.map((deta, index) => {
+                return <p key={index}>{deta}</p>;
+              })}
+          </div>
+        );
+        return el;
+      })}
     </div>
   );
 }

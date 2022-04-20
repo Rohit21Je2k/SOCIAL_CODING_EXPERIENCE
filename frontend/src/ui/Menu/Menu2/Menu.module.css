@@ -1,0 +1,20 @@
+.menu {
+  display: flex;
+  gap: 20px;
+}
+
+.menuBtn {
+  padding: 10px;
+  border: 0;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0.6;
+  cursor: pointer;
+  background: none;
+}
+
+.menuBtn.selected,
+.menuBtn:hover {
+  background-color: rgb(14, 167, 238, 0.7);
+}

@@ -1,44 +1,31 @@
 import { Router } from "express";
-import { check } from "express-validator";
 
 import {
+  getDashboard,
+  follow,
+  unFollow,
+  getFollowing,
+  search,
+  getLeaderBoard,
   getUsers,
-  getUser,
-  signup,
-  login,
-  getleaderboard,
-  sendRequest,
-} from "../controllers/user-controller.js";
+  removeFollower,
+} from "../controllers/user/_index.js";
+
+import { isValidToken } from "../middleware/validators/_index.js";
 
 const router = Router();
 
-const passLength = 6;
-
-router.post(
-  "/signup",
-  [
-    check("name").not().isEmpty(),
-    check("email").normalizeEmail().isEmail(),
-    check("password").isLength({ min: passLength }),
-  ],
-  signup
-);
-
-router.post(
-  "/login",
-  [
-    check("email").normalizeEmail().isEmail(),
-    check("password").isLength({ min: passLength }),
-  ],
-  login
-);
-
-router.post("/", [check("email").not().isEmpty()], getUser);
-
 router.get("/users", getUsers);
 
-router.get("/leaderboard", getleaderboard);
+router.post("/dashboard/:username", getDashboard);
 
-router.post("/addfriend", sendRequest);
+router.get("/search/:username", search);
+
+router.get("/leaderboard", getLeaderBoard);
+
+router.post("/follow", isValidToken, follow);
+router.post("/unfollow", isValidToken, unFollow);
+router.post("/removefollower", isValidToken, removeFollower);
+router.get("/following/:username", getFollowing);
 
 export default router;
