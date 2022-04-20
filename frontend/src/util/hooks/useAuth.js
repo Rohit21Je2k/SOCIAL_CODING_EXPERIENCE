@@ -121,9 +121,7 @@ export function useAuth() {
       }
     } catch (err) {
       console.log(err);
-      if (err.error) {
-        alert(err);
-      }
+      alert(err || "Some error occured");
     }
   }, []);
 

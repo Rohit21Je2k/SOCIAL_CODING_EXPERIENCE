@@ -15,6 +15,8 @@ import { Server } from "socket.io";
 import { httpError } from "./util/functions/_index.js";
 import chat from "./controllers/chat.js";
 
+import { isValidToken } from "./middleware/validators/_index.js";
+
 const PORT = process.env.PORT;
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = process.env.DB_PASSWORD;
@@ -62,7 +64,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/users", addBrowser, userRouter);
 
 // groups
-app.use("/api/groups", groupRouter);
+app.use("/api/groups", isValidToken, groupRouter);
 
 // path not found
 app.use((req, res) => {

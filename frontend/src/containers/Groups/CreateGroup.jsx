@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import createGroup from "../../util/api/createGroup";
 import { AuthContext } from "../../util/context/AuthContext";
 import Input from "../../ui/Input/Input";
@@ -7,8 +7,10 @@ import "./CreateGroup.css";
 
 export default function CreateGroup() {
   const { user, token } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const groupname = e.target.groupname.value;
     const data = await createGroup(groupname, user.username, token);
     if (!data) {
@@ -16,6 +18,7 @@ export default function CreateGroup() {
     } else {
       alert("group created");
     }
+    setLoading(false);
   };
   return (
     <div className="add-group search">
@@ -29,6 +32,7 @@ export default function CreateGroup() {
           />
           <button>Create Group</button>
         </form>
+        {loading && <h4 className="cg_t">Creating Group...</h4>}
       </div>
     </div>
   );

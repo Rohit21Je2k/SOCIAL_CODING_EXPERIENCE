@@ -3,7 +3,8 @@ import httpError from "../../util/functions/httpError.js";
 
 const createGroup = async (req, res) => {
   try {
-    const { username } = req.body;
+    const { username } = req.decodedToken;
+    console.log(username);
     if (!username || username === "") {
       throw httpError("invalid username");
     }
