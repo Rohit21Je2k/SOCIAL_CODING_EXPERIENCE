@@ -57,22 +57,19 @@ Social Coding Experience was built to make interaction between developers easy.
 Here are the features we have implemented in our website
 
 - **Search:**
-  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+  Using the search, a user can search for any registered profile and view their stats and also follow them.
 
 - **LeaderBoard:**
-  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-
-- **LeaderBoard:**
-  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+  The Leaderboard shows the top 10 performers on the site.
 
 - **DashBoard:**
-  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+  The dashboard displays the stats of the logged in user, which contains github, leetcode and codechef stats.
 
 - **Follow:**
-  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+  The logged in user can see whom he/she is following and who is following them.
 
 - **Groups:**
-  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+  In the groups tab, people can create and join mutiple groups and build a community where they interact and chat with one another.
 
 ## Built using
 
